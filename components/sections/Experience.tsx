@@ -1,0 +1,82 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { experiences } from "@/data/experience";
+
+export default function Experience() {
+  return (
+    <section id="experience" className="py-24 px-4 max-w-4xl mx-auto">
+      {/* Eyebrow */}
+      <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
+        EDUCATION & WORK
+      </p>
+
+      {/* Title */}
+      <h2 className="text-5xl font-bold text-white mt-2">Experience</h2>
+
+      {/* Timeline */}
+      <div className="relative ml-4 mt-12">
+        {/* Timeline Line */}
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-cyan-400/20" />
+
+        {/* Timeline Items */}
+        {experiences.map((exp, idx) => (
+          <motion.div
+            key={idx}
+            className="relative pl-8 pb-12"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            transition={{ duration: 0.6, delay: idx * 0.1 }}
+          >
+            {/* Timeline Dot */}
+            <div className="absolute left-0 top-1 w-3 h-3 rounded-full bg-cyan-400 -translate-x-1/2 shadow-lg shadow-cyan-400/50" />
+
+            {/* Period Tag */}
+            <p className="text-xs font-mono text-cyan-400 mb-2">{exp.period}</p>
+
+            {/* Card */}
+            <div className="glass-card p-6">
+              {/* Type Badge */}
+              <p className="text-xs font-mono text-cyan-400/60 tracking-widest uppercase mb-2">
+                {exp.type === "education" ? "Education" : "Work"}
+              </p>
+
+              {/* Title */}
+              <h3 className="text-xl font-bold text-white">{exp.title}</h3>
+
+              {/* Organization */}
+              <p className="text-gray-400 text-sm mt-1">{exp.organization}</p>
+
+              {/* Description */}
+              <p className="text-gray-500 text-sm mt-3 leading-relaxed">
+                {exp.description}
+              </p>
+
+              {/* Tech Stack */}
+              {exp.techStack && exp.techStack.length > 0 && (
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {exp.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="bg-white/10 text-cyan-300 text-xs px-2 py-0.5 rounded-full font-mono"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* GPA Badge */}
+              {exp.type === "education" && exp.gpa && (
+                <div className="border border-cyan-400/30 rounded-full px-3 py-1 text-cyan-400 text-xs inline-block mt-4">
+                  GPA: {exp.gpa}
+                </div>
+              )}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+}
