@@ -12,7 +12,7 @@ export default function BlogPage() {
       <div className="relative z-10">
         <Navbar />
         <div className="pt-20">
-          <Blog />
+          <Blog defaultShowAll />
         </div>
         <Footer />
       </div>
