@@ -40,7 +40,7 @@ export default function Contact() {
       icon: Mail,
       color: "#00d4ff",
       handle: "amanfaiz92@gmail.com",
-      url: "mailto:faiz@example.com",
+      url: "mailto:amanfaiz92@gmail.com",
     },
   ];
 
