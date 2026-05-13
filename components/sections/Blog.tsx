@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { blogPosts } from "@/data/blog";
 
@@ -22,9 +23,25 @@ const cardVariants = {
   },
 };
 
-export default function Blog() {
+type BlogProps = {
+  defaultShowAll?: boolean;
+};
+
+export default function Blog({ defaultShowAll = false }: BlogProps) {
+  const [showAll, setShowAll] = useState(defaultShowAll);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const displayed = showAll ? blogPosts : blogPosts.slice(0, 3);
+
+  useEffect(() => {
+    if (!showAll || defaultShowAll) {
+      return;
+    }
+
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [showAll, defaultShowAll]);
+
   return (
-    <section id="blog" className="py-24 px-4 max-w-7xl mx-auto">
+    <section ref={sectionRef} id="blog" className="py-24 px-4 max-w-7xl mx-auto">
       {/* Eyebrow */}
       <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
         WRITING & THOUGHTS
@@ -35,21 +52,46 @@ export default function Blog() {
 
       {/* Grid */}
       <motion.div
+        key={showAll ? "all" : "featured"}
         className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        animate="visible"
       >
-        {blogPosts.map((post) => (
+        {displayed.map((post) => (
           <motion.a
             key={post.slug}
             href={`/blog/${post.slug}`}
             className="glass-card p-6 hover:border-cyan-400/30 transition-all duration-300 group cursor-pointer"
             variants={cardVariants}
           >
-            {/* Date */}
-            <p className="text-xs font-mono text-gray-600 mb-3">{post.date}</p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 12,
+              }}
+            >
+              <span style={{ fontSize: 11, fontFamily: "monospace", color: "#6b7280" }}>
+                {post.date}
+              </span>
+              {post.featured && (
+                <span
+                  style={{
+                    fontSize: 9,
+                    fontFamily: "monospace",
+                    color: "#00d4ff",
+                    border: "1px solid rgba(0,212,255,0.3)",
+                    borderRadius: 9999,
+                    padding: "2px 8px",
+                    letterSpacing: "0.1em",
+                  }}
+                >
+                  FEATURED
+                </span>
+              )}
+            </div>
 
             {/* Title */}
             <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
@@ -81,15 +123,14 @@ export default function Blog() {
         ))}
       </motion.div>
 
-      {/* All Posts Link */}
-      <div className="mt-12 text-center">
-        <a
-          href="/blog"
-          className="text-cyan-400 hover:text-cyan-300 text-sm font-mono transition-colors"
+      {!defaultShowAll && (
+        <button
+          onClick={() => setShowAll(!showAll)}
+          className="mt-8 text-cyan-400 hover:text-cyan-300 text-sm font-mono transition-colors flex items-center gap-2 mx-auto"
         >
-          All Posts →
-        </a>
-      </div>
+          {showAll ? "← Show Less" : "View All Posts →"}
+        </button>
+      )}
     </section>
   );
 }
