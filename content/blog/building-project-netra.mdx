@@ -1,0 +1,83 @@
+---
+title: "How I Built an Adaptive Traffic System Using YOLOv8"
+date: "April 12, 2026"
+readTime: "12 min read"
+tags: ["Python", "YOLOv8", "OpenCV"]
+featured: true
+excerpt: "A deep dive into Project NETRA — how I trained YOLOv8 to detect vehicles in real-time, prioritize ambulances at intersections, and dynamically adjust traffic signal logic."
+---
+
+## The Problem I Couldn't Ignore
+
+It started with a news story. An ambulance stuck in Lucknow traffic for 40 minutes while a patient inside didn't make it. I'd seen this happen in real life too — emergency vehicles trapped behind red lights while the signal blindly counted down its timer, indifferent to who was waiting.
+
+I kept thinking: the technology to fix this already exists. Cameras are everywhere. Object detection models are open source. Why is no one connecting the dots at the intersection level?
+
+That became Project NETRA.
+
+## What I Set Out to Build
+
+The goal was straightforward on paper: a system that watches a traffic camera feed, detects vehicles in real-time, and — if it spots an ambulance or fire truck — overrides the normal signal logic to clear the lane immediately.
+
+No cloud dependency. No expensive hardware. Just a camera, a model, and a decision engine.
+
+## Choosing YOLOv8
+
+I evaluated a few options — older YOLO versions, SSD, even a basic OpenCV background subtraction approach. YOLOv8 by Ultralytics won for three reasons:
+
+**Speed.** Running on Google Colab's T4 GPU, YOLOv8n processes frames at ~45 FPS. Fast enough for real intersections.
+
+**Accuracy on small objects.** Emergency vehicles at a distance are small in frame. YOLOv8's anchor-free detection head handles this significantly better than v5.
+
+**Fine-tuning ease.** The API is remarkably clean:
+
+```python
+from ultralytics import YOLO
+model = YOLO("yolov8n.pt")
+model.train(data="traffic.yaml", epochs=50, imgsz=640)
+```
+
+## The Hard Part: Data
+
+Pre-trained YOLO knows what an ambulance looks like in Western countries. Indian ambulances look completely different — green and white, different proportions, different markings.
+
+I spent two weeks collecting and annotating images:
+- Scraped Google Images and YouTube frames for Indian emergency vehicles
+- Used Roboflow to annotate bounding boxes and export in YOLO format
+- Applied augmentations to increase dataset diversity
+
+Final dataset: ~2,400 images across 4 classes — car, bus, motorcycle, ambulance.
+
+## The Signal Logic
+
+Detection alone is not enough. The interesting engineering is the decision layer:
+
+```python
+def process_frame(frame, model, signal_state):
+    results = model(frame)[0]
+    for box in results.boxes:
+        cls = int(box.cls[0])
+        conf = float(box.conf[0])
+        if cls == AMBULANCE_CLASS and conf > 0.75:
+            signal_state.trigger_priority_override(
+                lane=detect_lane(box)
+            )
+            return signal_state
+    vehicle_count = len(results.boxes)
+    signal_state.update_timer(vehicle_count)
+    return signal_state
+```
+
+## What I Learned
+
+**Confidence thresholds matter enormously.** At 0.5 confidence, the model falsely flagged white SUVs as ambulances 12% of the time. At 0.75, false positives dropped under 2%.
+
+**The camera angle is everything.** A top-down camera gives the best lane detection. Real deployment needs standardized camera positioning.
+
+**Colab has limits.** I ended up processing video in chunks and stitching results.
+
+## What Is Next
+
+The current version runs on recorded video. The next step is a WebSocket-based system ingesting a live RTSP stream and pushing signal commands to a microcontroller.
+
+*The full code is on GitHub. Stars and issues welcome.*
