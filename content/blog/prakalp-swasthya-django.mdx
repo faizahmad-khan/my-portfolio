@@ -1,0 +1,66 @@
+---
+title: "Building a Healthcare Directory App with Django and React"
+date: "February 18, 2026"
+readTime: "10 min read"
+tags: ["Django", "React", "PostgreSQL"]
+featured: false
+excerpt: "How I designed the data model for Prakalp-Swasthya, built REST APIs with Django, and consumed them in a React frontend to map healthcare infrastructure across Lucknow."
+---
+
+## Why This Project Exists
+
+Lucknow has hundreds of medical stores, clinics, and hospitals. Finding the right one — especially at 2am when someone is sick — is genuinely difficult. Google Maps helps, but it does not filter by specialization, 24/7 availability, or verified contact numbers.
+
+Prakalp-Swasthya is a structured directory that does exactly that for the Lucknow region.
+
+## Data Modeling First
+
+```python
+class Facility(models.Model):
+    FACILITY_TYPES = [
+        ('medical_store', 'Medical Store'),
+        ('clinic', 'Clinic'),
+        ('hospital', 'Hospital'),
+        ('diagnostic', 'Diagnostic Center'),
+    ]
+    name = models.CharField(max_length=200)
+    facility_type = models.CharField(max_length=20, choices=FACILITY_TYPES)
+    address = models.TextField()
+    locality = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    is_24_hours = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True)
+```
+
+## Django REST Framework
+
+```python
+class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Facility.objects.filter(is_active=True)
+    serializer_class = FacilitySerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        facility_type = self.request.query_params.get('type')
+        locality = self.request.query_params.get('locality')
+        is_24h = self.request.query_params.get('24h')
+        if facility_type:
+            qs = qs.filter(facility_type=facility_type)
+        if locality:
+            qs = qs.filter(locality__icontains=locality)
+        if is_24h == 'true':
+            qs = qs.filter(is_24_hours=True)
+        return qs.select_related().prefetch_related('specializations')
+```
+
+The select_related and prefetch_related reduced database queries from 40+ per request down to 3. Always check your query count.
+
+## Lessons
+
+**N+1 queries will destroy your API performance.** Profile early with Django Debug Toolbar.
+
+**Healthcare data goes stale fast.** Build a report incorrect info flow from day one.
+
+**Coordinates matter more than addresses.** Addresses in India are inconsistent. Store lat/lng directly.
