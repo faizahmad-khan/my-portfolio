@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import type { BlogPost } from "@/lib/blog";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,13 +30,13 @@ type BlogProps = {
 
 export default function Blog({ defaultShowAll = false }: BlogProps) {
   const [showAll, setShowAll] = useState(defaultShowAll);
-  const [blogPosts, setBlogPosts] = useState<any[]>([]);
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const sectionRef = useRef<HTMLElement | null>(null);
   const displayed = showAll ? blogPosts : blogPosts.slice(0, 3);
 
   useEffect(() => {
     fetch("/api/posts")
-      .then((r) => r.json())
+      .then((r) => r.json() as Promise<BlogPost[]>)
       .then(setBlogPosts);
   }, []);
 
