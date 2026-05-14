@@ -1,0 +1,75 @@
+---
+title: "5 Things I Learned Building Full-Stack Apps as a Student"
+date: "January 10, 2026"
+readTime: "6 min read"
+tags: ["Next.js", "Django", "Lessons"]
+featured: false
+excerpt: "From ignoring environment variables to deploying broken builds — the real mistakes I made across my projects and what I would do differently."
+---
+
+## The Honest Version
+
+These are things that genuinely went wrong, cost me time, and occasionally embarrassed me in front of teammates.
+
+## 1. I Pushed API Keys to GitHub
+
+Classic. I committed the .env file and pushed. GitHub secret scanning caught it within 60 seconds.
+
+```bash
+# .gitignore — non-negotiable
+.env
+.env.local
+.env.production
+```
+
+## 2. I Ignored Database Migrations Until It Was Too Late
+
+On Prakalp-Swasthya, instead of writing proper migrations I was dropping and recreating the database locally. This worked fine until we had real data in staging.
+
+Every model change gets a migration immediately now:
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+## 3. I Did Not Write a Single Test for Six Months
+
+A refactor on OpportuAI broke the authentication flow and nobody caught it until a user reported it.
+
+```typescript
+describe('auth', () => {
+  it('rejects invalid tokens', async () => { ... });
+  it('refreshes expired sessions', async () => { ... });
+  it('logs out correctly', async () => { ... });
+});
+```
+
+Test the things that would be embarrassing if they broke.
+
+## 4. I Over-Engineered the Architecture
+
+I spent three days setting up microservices for an app that ended up having 40 users. We rewrote it as a monolith in week four.
+
+Build the simplest thing that could possibly work. Reach for complexity only when the simple version is actually causing problems.
+
+## 5. I Did Not Read Error Messages Properly
+
+```
+Error: Cannot read properties of undefined (reading 'map')
+at ProjectList (/components/ProjectList.tsx:24:18)
+```
+
+Past me would Google the error. Present me reads line 24 of ProjectList.tsx first.
+
+My debugging order:
+1. Read the full error message and stack trace
+2. Find the exact line it points to
+3. Add a console.log before that line
+4. Then Google if steps 1-3 do not solve it
+
+90% of bugs are solved at step 2 or 3.
+
+## The Through-Line
+
+Every mistake comes from the same root cause: moving fast without thinking about what happens next. The best investment in any project is 20 minutes of thinking before writing the first line of code.
