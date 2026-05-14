@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { blogPosts } from "@/data/blog";
+import Link from "next/link";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,8 +29,15 @@ type BlogProps = {
 
 export default function Blog({ defaultShowAll = false }: BlogProps) {
   const [showAll, setShowAll] = useState(defaultShowAll);
+  const [blogPosts, setBlogPosts] = useState<any[]>([]);
   const sectionRef = useRef<HTMLElement | null>(null);
   const displayed = showAll ? blogPosts : blogPosts.slice(0, 3);
+
+  useEffect(() => {
+    fetch("/api/posts")
+      .then((r) => r.json())
+      .then(setBlogPosts);
+  }, []);
 
   useEffect(() => {
     if (!showAll || defaultShowAll) {
@@ -59,12 +66,15 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
         animate="visible"
       >
         {displayed.map((post) => (
-          <motion.a
+          <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="glass-card p-6 hover:border-cyan-400/30 transition-all duration-300 group cursor-pointer"
-            variants={cardVariants}
+            style={{ textDecoration: "none", display: "block" }}
           >
+            <motion.div
+              className="glass-card p-6 hover:border-cyan-400/30 transition-all duration-300 group cursor-pointer"
+              variants={cardVariants}
+            >
             <div
               style={{
                 display: "flex",
@@ -119,7 +129,8 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
                 ))}
               </div>
             </div>
-          </motion.a>
+            </motion.div>
+          </Link>
         ))}
       </motion.div>
 
