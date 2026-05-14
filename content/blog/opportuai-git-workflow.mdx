@@ -1,0 +1,77 @@
+---
+title: "Structuring a Multi-Developer Next.js Project with Git Workflows"
+date: "March 5, 2026"
+readTime: "7 min read"
+tags: ["Next.js", "Git", "TypeScript"]
+featured: true
+excerpt: "Lessons learned from building OpportuAI — how we set up branch protection, PR templates, and a contributor workflow that kept the codebase clean across multiple developers."
+---
+
+## The First Week Was Chaos
+
+OpportuAI started as a hackathon idea that grew into a real project. Within the first week of collaborating, we had three problems:
+
+1. Two people pushed directly to main and broke the deployment
+2. Nobody knew which feature was on which branch
+3. A PR merged with a TypeScript error because nobody reviewed it properly
+
+We stopped writing features for a day and fixed the workflow instead. It was the best decision we made on the project.
+
+## Branch Naming Convention
+
+```
+feature/short-description     new functionality
+fix/short-description         bug fixes
+refactor/short-description    code cleanup
+chore/short-description       dependency updates
+```
+
+## Branch Protection Rules
+
+On GitHub, we set these rules on main:
+- **Require pull request before merging** — no direct pushes
+- **Require at least 1 approval** — someone else must review
+- **Require status checks to pass** — TypeScript build and ESLint must succeed
+- **Dismiss stale reviews** — approvals reset if new commits are pushed
+
+## PR Template
+
+We created `.github/pull_request_template.md`:
+
+```markdown
+## What does this PR do?
+
+## Type of change
+- [ ] New feature
+- [ ] Bug fix
+- [ ] Refactor
+- [ ] Chore
+
+## Testing
+- [ ] Tested locally
+- [ ] Checked on mobile
+
+## Screenshots (if UI change)
+```
+
+## TypeScript Strictness
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  }
+}
+```
+
+noUncheckedIndexedAccess caught three real bugs during development that would have been runtime errors in production.
+
+## What I Would Tell Every Student Developer
+
+**Agree on conventions before writing code, not after.** Five minutes of discussion at the start saves hours later.
+
+**The PR review is the teaching moment.** I learned more from having my code reviewed than from any tutorial.
+
+**Small PRs merge faster and have fewer bugs.** A 50-line PR gets reviewed properly. A 500-line PR gets a rubber stamp.
