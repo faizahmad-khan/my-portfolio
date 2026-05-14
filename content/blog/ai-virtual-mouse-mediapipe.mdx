@@ -1,0 +1,96 @@
+---
+title: "Building a Touchless Mouse with MediaPipe and Python"
+date: "March 28, 2026"
+readTime: "8 min read"
+tags: ["Python", "MediaPipe", "OpenCV"]
+featured: true
+excerpt: "How I used MediaPipe hand landmark detection to map finger positions to cursor movement and click gestures — no hardware required, just a webcam and 200 lines of Python."
+---
+
+## Where the Idea Came From
+
+I was watching a sci-fi movie where the protagonist controls a holographic interface with hand gestures. My reaction was: I have a webcam and MediaPipe installed. Let me see how close I can get this weekend.
+
+Two days later, I was controlling my laptop cursor with my index finger. Not perfect. But real.
+
+## How MediaPipe Hand Tracking Works
+
+MediaPipe detects 21 landmarks on each hand — every joint of every finger, plus the wrist. Each landmark has an x, y, and z coordinate normalized to the frame dimensions.
+
+```python
+import mediapipe as mp
+import cv2
+
+mp_hands = mp.solutions.hands
+hands = mp_hands.Hands(
+    static_image_mode=False,
+    max_num_hands=1,
+    min_detection_confidence=0.7,
+    min_tracking_confidence=0.5
+)
+```
+
+Key landmarks for mouse control:
+- **Landmark 8**: Index fingertip — maps to cursor position
+- **Landmark 4**: Thumb tip — used for click detection
+- **Landmark 12**: Middle fingertip — used for right click
+
+## Mapping Finger Position to Screen Coordinates
+
+```python
+import pyautogui
+import numpy as np
+
+FRAME_W, FRAME_H = 640, 480
+SCREEN_W, SCREEN_H = pyautogui.size()
+MARGIN = 0.2
+
+def map_to_screen(finger_x, finger_y):
+    screen_x = np.interp(finger_x,
+        [FRAME_W * MARGIN, FRAME_W * (1 - MARGIN)], [0, SCREEN_W])
+    screen_y = np.interp(finger_y,
+        [FRAME_H * MARGIN, FRAME_H * (1 - MARGIN)], [0, SCREEN_H])
+    return int(screen_x), int(screen_y)
+```
+
+## Detecting Click Gestures
+
+```python
+def get_distance(p1, p2):
+    return ((p1.x - p2.x)**2 + (p1.y - p2.y)**2) ** 0.5
+
+CLICK_THRESHOLD = 0.04
+
+if get_distance(thumb_tip, index_tip) < CLICK_THRESHOLD:
+    pyautogui.click()
+```
+
+## The Smoothing Problem
+
+Raw landmark coordinates are noisy. Even a perfectly still hand jitters by several pixels each frame.
+
+```python
+SMOOTHING = 0.7
+prev_x, prev_y = 0, 0
+
+def smooth(curr_x, curr_y):
+    global prev_x, prev_y
+    smooth_x = prev_x * SMOOTHING + curr_x * (1 - SMOOTHING)
+    smooth_y = prev_y * SMOOTHING + curr_y * (1 - SMOOTHING)
+    prev_x, prev_y = smooth_x, smooth_y
+    return int(smooth_x), int(smooth_y)
+```
+
+Higher smoothing = more stable but more lag. 0.7 was the sweet spot.
+
+## What Works vs What Does Not
+
+**Works well:** cursor movement, single clicks, scrolling, low light conditions.
+
+**Does not work well:** drag and drop, fast movements, multiple hands in frame.
+
+## What I Would Do Differently
+
+Use a proper gesture recognition classifier instead of hardcoded distance thresholds. The current approach is brittle — changing lighting conditions noticeably affects accuracy.
+
+*Full source code is on GitHub.*
