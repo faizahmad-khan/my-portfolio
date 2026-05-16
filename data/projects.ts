@@ -17,7 +17,6 @@ export const projects = [
     techStack: ["Next.js", "React", "Tailwind CSS", "Shadcn UI", "TypeScript"],
     image: "/opportuai.png",
     github: "https://github.com/faizahmad-khan/OpportuAI",
-    link: "https://example.com",
     featured: true,
     status: "WIP" as const,
   },
