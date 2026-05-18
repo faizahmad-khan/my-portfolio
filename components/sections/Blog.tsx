@@ -49,19 +49,19 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
   }, [showAll, defaultShowAll]);
 
   return (
-    <section ref={sectionRef} id="blog" className="py-24 px-4 max-w-7xl mx-auto">
+    <section ref={sectionRef} id="blog" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
       {/* Eyebrow */}
       <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
         WRITING & THOUGHTS
       </p>
 
       {/* Title */}
-      <h2 className="text-5xl font-bold text-white mt-2">Blog</h2>
+      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">Blog</h2>
 
       {/* Grid */}
       <motion.div
         key={showAll ? "all" : "featured"}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
