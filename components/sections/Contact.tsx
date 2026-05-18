@@ -55,14 +55,14 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-4 max-w-5xl mx-auto">
+    <section id="contact" className="py-16 px-4 md:py-24 max-w-5xl mx-auto overflow-x-hidden">
       {/* Eyebrow */}
       <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
         GET IN TOUCH
       </p>
 
       {/* Title */}
-      <h2 className="text-5xl font-bold text-white mt-2">Contact</h2>
+      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">Contact</h2>
 
       {/* Find me on section */}
       <h3 className="text-xl font-semibold text-gray-300 mt-12 mb-6">
@@ -84,16 +84,13 @@ export default function Contact() {
               key={social.name}
               href={social.url}
               className="glass-card p-6 hover:border-cyan-400/30 hover:glow-border transition-all cursor-pointer"
+              style={{ minWidth: 0 }}
               whileHover={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
             >
-              <Icon
-                size={32}
-                style={{ color: social.color }}
-                className="mb-3"
-              />
+              <Icon size={20} style={{ color: social.color }} className="mb-3 md:size-8" />
               <p className="font-bold text-white text-sm">{social.name}</p>
               <p className="text-gray-500 text-xs mt-1">{social.handle}</p>
             </motion.a>
@@ -103,7 +100,7 @@ export default function Contact() {
 
       {/* Contact Form */}
       <motion.div
-        className="glass-card p-8 max-w-2xl mx-auto"
+        className="glass-card p-8 max-w-2xl w-full mx-4 md:mx-auto"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -128,6 +125,7 @@ export default function Contact() {
                 }
                 placeholder="Faiz Ahmad Khan"
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all"
+                style={{ fontSize: 16 }}
               />
             </div>
 
@@ -144,6 +142,7 @@ export default function Contact() {
                 }
                 placeholder="amanfaiz92@gmail.com"
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all"
+                style={{ fontSize: 16 }}
               />
             </div>
 
@@ -160,6 +159,7 @@ export default function Contact() {
                 }
                 placeholder="Your message here..."
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all resize-none"
+                style={{ fontSize: 16 }}
               />
             </div>
 
