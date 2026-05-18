@@ -8,7 +8,7 @@ export default function Footer() {
         </p>
 
         {/* Right */}
-        <div className="flex gap-3">
+        <div className="flex flex-wrap justify-center gap-2">
           <button className="border border-white/10 text-gray-600 text-xs px-4 py-1.5 rounded-full hover:border-white/20 hover:text-gray-400 transition-all">
             Visitors
           </button>
