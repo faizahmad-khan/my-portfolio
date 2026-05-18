@@ -11,17 +11,17 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-24 px-4 max-w-7xl mx-auto">
+    <section id="about" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
       {/* Eyebrow */}
       <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
         WHO I AM
       </p>
 
       {/* Title */}
-      <h2 className="text-5xl font-bold text-white mt-2">About Me</h2>
+      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">About Me</h2>
 
       {/* Two Column Layout */}
-      <div className="grid lg:grid-cols-2 gap-16 mt-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-12">
         {/* Left Column */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -31,12 +31,12 @@ export default function About() {
         >
           <h3 className="text-2xl font-bold text-white">Hi, I'm Faiz</h3>
 
-          <p className="text-gray-400 leading-relaxed mt-4">
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed mt-4">
             A passionate Full-Stack Developer based in Lucknow, India. I build
             modern web applications with clean architecture and great user experience.
           </p>
 
-          <p className="text-gray-400 leading-relaxed mt-4">
+          <p className="text-gray-400 text-sm md:text-base leading-relaxed mt-4">
             My focus is on creating scalable systems — from RESTful APIs to
             interactive frontends. I believe in writing code that is readable,
             maintainable, and performs well.
@@ -87,7 +87,7 @@ export default function About() {
 
       {/* Stats Grid */}
       <motion.div
-        className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-16"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-16"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -97,11 +97,12 @@ export default function About() {
           <motion.div
             key={idx}
             className="glass-card p-6 text-center"
+            style={{ minWidth: 0 }}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
           >
-            <p className="text-3xl font-bold text-cyan-400">{stat.number}</p>
+            <p className="text-2xl md:text-3xl font-bold text-cyan-400">{stat.number}</p>
             <p className="text-xs text-gray-500 mt-1">{stat.label}</p>
           </motion.div>
         ))}
@@ -121,11 +122,13 @@ export default function About() {
           </span>
           <span className="text-xs text-gray-500">@faizahmad-khan ↗</span>
         </div>
-        <img
-          src="https://ghchart.rshah.org/00d4ff/faizahmad-khan"
-          alt="GitHub Contributions"
-          className="w-full mt-4 rounded opacity-90"
-        />
+        <div style={{ overflowX: "auto" }}>
+          <img
+            src="https://ghchart.rshah.org/00d4ff/faizahmad-khan"
+            alt="GitHub Contributions"
+            className="w-full mt-4 rounded opacity-90"
+          />
+        </div>
       </motion.div>
     </section>
   );
