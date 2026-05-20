@@ -38,13 +38,13 @@ export default function Hero() {
       {skillBadges.map((skill, i) => (
         <motion.div
           key={skill.name}
-          className="absolute hidden lg:flex flex-col items-center gap-1.5"
+          className="absolute flex flex-col items-center gap-1.5"
           style={{
             ...skill.style,
             background: "rgba(255,255,255,0.04)",
             border: "1px solid rgba(255,255,255,0.08)",
             borderRadius: "16px",
-            padding: "14px 16px",
+            padding: "10px 14px",
             width: "88px",
             backdropFilter: "blur(8px)",
             animation: `float 6s ease-in-out ${i * 0.5}s infinite`,
@@ -53,7 +53,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 + i * 0.08, duration: 0.5 }}
         >
-          <skill.Icon size={26} color={skill.color} />
+          <skill.Icon size={22} color={skill.color} />
           <span
             style={{
               fontSize: "10px",
@@ -69,7 +69,7 @@ export default function Hero() {
       ))}
 
       {/* ── Center Content ── */}
-      <div className="relative z-10 flex flex-col items-center text-center gap-3 px-4 max-w-4xl">
+      <div className="relative z-10 flex flex-col items-center text-center gap-3 px-6 md:px-4 max-w-4xl w-full">
 
         {/* Typewriter watermark — very faint, sits behind */}
         <div
@@ -87,8 +87,9 @@ export default function Hero() {
             speed={25}
             repeat={Infinity}
             cursor={false}
+            className="text-[clamp(32px,9vw,60px)] md:text-[clamp(40px,8vw,90px)]"
             style={{
-              fontSize: "clamp(40px, 8vw, 90px)",
+              fontSize: "clamp(32px, 8vw, 96px)",
               fontWeight: 900,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
@@ -102,8 +103,7 @@ export default function Hero() {
 
         {/* Eyebrow */}
         <motion.p
-          className="font-mono text-gray-500 uppercase tracking-[0.4em]"
-          style={{ fontSize: "11px" }}
+          className="font-mono text-gray-500 uppercase tracking-[0.4em] text-[10px] md:text-[11px]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -113,8 +113,7 @@ export default function Hero() {
 
         {/* Name */}
         <motion.h1
-          className="font-bold text-white leading-none"
-          style={{ fontSize: "clamp(48px, 9vw, 96px)" }}
+          className="font-bold text-white leading-none text-[clamp(36px,10vw,60px)] md:text-[clamp(48px,8vw,72px)] lg:text-[clamp(48px,9vw,96px)]"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
@@ -124,8 +123,7 @@ export default function Hero() {
 
         {/* Subtitle */}
         <motion.p
-          className="text-gray-400"
-          style={{ fontSize: "16px" }}
+          className="text-gray-400 text-xs md:text-base w-full px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -139,44 +137,17 @@ export default function Hero() {
 
         {/* Glow Orb */}
         <motion.div
-          className="relative flex items-center justify-center my-2"
-          style={{ width: 160, height: 160 }}
+          className="relative flex items-center justify-center my-2 w-25 h-25 md:w-40 md:h-40"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
         >
           {/* Outer rings */}
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            borderRadius: "50%",
-            border: "1px solid rgba(0,212,255,0.12)",
-            animation: "spin 22s linear infinite",
-          }} />
-          <div style={{
-            position: "absolute",
-            inset: "20px",
-            borderRadius: "50%",
-            border: "1px solid rgba(0,212,255,0.18)",
-            animation: "spin-reverse 16s linear infinite",
-          }} />
+          <div className="absolute inset-0 rounded-full border border-cyan-400/10" style={{ animation: "spin 22s linear infinite" }} />
+          <div className="absolute inset-3 rounded-full border border-cyan-400/15 md:inset-5" style={{ animation: "spin-reverse 16s linear infinite" }} />
           {/* Inner glow */}
-          <div style={{
-            width: 80,
-            height: 80,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(0,212,255,0.18) 0%, transparent 70%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}>
-            <div style={{
-              width: 14,
-              height: 14,
-              borderRadius: "50%",
-              background: "#00d4ff",
-              boxShadow: "0 0 20px #00d4ff, 0 0 40px rgba(0,212,255,0.5)",
-            }} />
+          <div className="flex items-center justify-center rounded-full w-10 h-10 md:w-20 md:h-20" style={{ background: "radial-gradient(circle, rgba(0,212,255,0.18) 0%, transparent 70%)" }}>
+            <div className="w-3.5 h-3.5 rounded-full bg-cyan-400" style={{ boxShadow: "0 0 20px #00d4ff, 0 0 40px rgba(0,212,255,0.5)" }} />
           </div>
         </motion.div>
 
@@ -194,8 +165,7 @@ export default function Hero() {
 
         {/* Description */}
         <motion.p
-          className="text-gray-500 max-w-md leading-relaxed"
-          style={{ fontSize: "14px" }}
+          className="text-gray-500 max-w-md leading-relaxed text-xs md:text-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -208,14 +178,14 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <motion.div
-          className="flex items-center gap-4 mt-2"
+          className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-2 w-full sm:w-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
         >
           <Link
             href="/projects"
-            className="flex items-center gap-2 text-gray-300 text-sm hover:text-white transition-all"
+            className="flex items-center gap-2 justify-center w-full sm:w-auto text-gray-300 text-sm hover:text-white transition-all"
             style={{
               padding: "12px 24px",
               borderRadius: 9999,
@@ -231,7 +201,7 @@ export default function Hero() {
             download="Faiz_Ahmad_Khan_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex items-center gap-2 text-black font-semibold text-sm hover:opacity-90 transition-all"
+            className="relative flex items-center gap-2 justify-center w-full sm:w-auto text-black font-semibold text-sm hover:opacity-90 transition-all"
             style={{
               padding: "12px 24px",
               borderRadius: 9999,
