@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import {
   SiReact,
@@ -100,6 +100,7 @@ function getPositions(count: number, sphereRadius: number): SpherePosition[] {
 }
 
 export default function Skills() {
+  const [scale, setScale] = useState(1);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const badgeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const frameRef = useRef<number | null>(null);
@@ -110,6 +111,20 @@ export default function Skills() {
   const targetYawInfluenceRef = useRef(0);
   const isDraggingRef = useRef(false);
   const lastMouseRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const updateScale = () => {
+      if (window.innerWidth < 480) setScale(0.38);
+      else if (window.innerWidth < 768) setScale(0.52);
+      else if (window.innerWidth < 1024) setScale(0.72);
+      else setScale(1);
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
 
   useEffect(() => {
     const animate = () => {
@@ -126,6 +141,7 @@ export default function Skills() {
 
       const centerX = container.clientWidth / 2;
       const centerY = container.clientHeight / 2;
+      const renderRadius = 280 * scale;
 
       positionsRef.current.forEach((pos, index) => {
         const badge = badgeRefs.current[index];
@@ -141,7 +157,7 @@ export default function Skills() {
         const y2 = pos.y * cosX - z1 * sinX;
         const z2 = pos.y * sinX + z1 * cosX;
 
-        const depth = (z2 + 280) / (2 * 280);
+        const depth = (z2 + renderRadius) / (2 * renderRadius);
         const opacity = 0.3 + depth * 0.7;
         const scale = 0.6 + depth * 0.6;
         const zIndex = Math.round(depth * 100) + 1;
@@ -163,7 +179,7 @@ export default function Skills() {
         cancelAnimationFrame(frameRef.current);
       }
     };
-  }, []);
+  }, [scale]);
 
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     isDraggingRef.current = true;
@@ -206,7 +222,7 @@ export default function Skills() {
   return (
     <motion.section
       id="skills"
-      className="py-24 px-4 overflow-visible"
+      className="py-16 px-4 overflow-hidden"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -217,13 +233,13 @@ export default function Skills() {
           <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase mb-3">
             FORGE
           </p>
-          <h2 className="text-5xl font-bold text-white">Technical Expertise</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white">Technical Expertise</h2>
         </div>
 
           <div
             ref={containerRef}
             className="relative mx-auto cursor-grab active:cursor-grabbing overflow-visible"
-            style={{ width: 750, height: 750, marginTop: -80 }}
+            style={{ width: "min(100vw, 750px)", height: "min(100vw, 750px)", marginTop: -80 }}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
