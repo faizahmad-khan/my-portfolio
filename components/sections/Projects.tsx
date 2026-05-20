@@ -12,12 +12,12 @@ export default function Projects() {
   const displayed = showAll ? projects : projects.slice(0, 3);
 
   return (
-    <section id="projects" className="py-24 px-4 max-w-7xl mx-auto">
+    <section id="projects" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
       {/* Header */}
       <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
         FEATURED WORK
       </p>
-      <h2 className="text-5xl font-bold text-white mt-2 mb-12">Projects</h2>
+      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2 mb-12">Projects</h2>
 
       {/* Grid */}
       <motion.div
@@ -37,7 +37,7 @@ export default function Projects() {
           <motion.div
             key={project.id}
             className="relative"
-            style={{ height: 340, perspective: 1000 }}
+            style={{ height: "auto", minHeight: 300, perspective: 1000 }}
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -139,7 +139,7 @@ export default function Projects() {
                     <p style={{
                       fontSize: 10,
                       fontFamily: "monospace",
-                      color: "rgba(255,255,255,0.3)",
+                      color: "rgba(255,255,255,0.6)",
                       letterSpacing: "0.15em",
                       textTransform: "uppercase",
                     }}>
