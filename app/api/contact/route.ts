@@ -3,6 +3,13 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
+    if (!supabase) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
+      );
+    }
+
     const { name, email, message } = await req.json();
 
     if (!name || !email || !message) {

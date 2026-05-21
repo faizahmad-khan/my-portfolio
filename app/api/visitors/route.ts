@@ -2,6 +2,10 @@ import { supabase } from "@/lib/supabase";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  if (!supabase) {
+    return NextResponse.json({ count: 0 });
+  }
+
   const { data } = await supabase
     .from("visitors")
     .select("count")
@@ -12,6 +16,10 @@ export async function GET() {
 }
 
 export async function POST() {
+  if (!supabase) {
+    return NextResponse.json({ count: 0 });
+  }
+
   const { data } = await supabase
     .from("visitors")
     .select("count")
