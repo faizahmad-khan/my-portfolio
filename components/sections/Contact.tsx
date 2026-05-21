@@ -2,16 +2,22 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Send, Code, Briefcase } from "lucide-react";
+import {
+  AlertCircle,
+  Briefcase,
+  CheckCircle,
+  Code,
+  Loader,
+  Mail,
+  Send,
+} from "lucide-react";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const socialLinks = [
     {
@@ -44,14 +50,39 @@ export default function Contact() {
     },
   ];
 
-  const handleSubmit = () => {
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitted(true);
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setSubmitted(false), 3000);
-    }, 1500);
+  const handleSubmit = async () => {
+    if (!name || !email || !message) {
+      setErrorMsg("Please fill in all fields");
+      setStatus("error");
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error);
+
+      setStatus("success");
+      setName("");
+      setEmail("");
+      setMessage("");
+    } catch (err: unknown) {
+      setStatus("error");
+      setErrorMsg(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -110,81 +141,114 @@ export default function Contact() {
           Send a Message
         </h3>
 
-        {!submitted ? (
-          <div className="space-y-6">
-            {/* Name Field */}
-            <div>
-              <label className="block text-sm text-gray-400 mb-2 font-mono">
-                Your Name
-              </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                placeholder="Faiz Ahmad Khan"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all"
-                style={{ fontSize: 16 }}
-              />
-            </div>
+        <div className="space-y-6">
+          <div>
+            <label className="block text-sm text-gray-400 mb-2 font-mono">
+              Your Name
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Faiz Ahmad Khan"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all"
+              style={{ fontSize: 16 }}
+            />
+          </div>
 
-            {/* Email Field */}
-            <div>
-              <label className="block text-sm text-gray-400 mb-2 font-mono">
-                Email
-              </label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                placeholder="amanfaiz92@gmail.com"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all"
-                style={{ fontSize: 16 }}
-              />
-            </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-2 font-mono">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="amanfaiz92@gmail.com"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all"
+              style={{ fontSize: 16 }}
+            />
+          </div>
 
-            {/* Message Field */}
-            <div>
-              <label className="block text-sm text-gray-400 mb-2 font-mono">
-                Message
-              </label>
-              <textarea
-                rows={5}
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                placeholder="Your message here..."
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all resize-none"
-                style={{ fontSize: 16 }}
-              />
-            </div>
+          <div>
+            <label className="block text-sm text-gray-400 mb-2 font-mono">
+              Message
+            </label>
+            <textarea
+              rows={5}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Your message here..."
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all resize-none"
+              style={{ fontSize: 16 }}
+            />
+          </div>
 
-            {/* Submit Button */}
-            <button
-              onClick={handleSubmit}
-              disabled={isSubmitting}
-              className="w-full bg-cyan-400 text-black font-bold py-4 rounded-xl mt-6 hover:bg-cyan-300 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+          {status === "error" && errorMsg && (
+            <p
+              style={{
+                color: "#ef4444",
+                fontSize: 12,
+                fontFamily: "monospace",
+                marginTop: 8,
+                textAlign: "center",
+              }}
             >
-              {isSubmitting ? (
-                <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
-              ) : (
-                <>
-                  Send Message <Send size={16} />
-                </>
-              )}
-            </button>
-          </div>
-        ) : (
-          <div className="text-center py-8">
-            <p className="text-cyan-400 text-lg font-semibold">
-              ✓ Message sent! I'll get back to you soon.
+              {errorMsg}
             </p>
-          </div>
-        )}
+          )}
+
+          <button
+            onClick={handleSubmit}
+            disabled={status === "loading" || status === "success"}
+            style={{
+              width: "100%",
+              padding: "14px 24px",
+              borderRadius: 12,
+              background:
+                status === "success"
+                  ? "#22c55e"
+                  : status === "error"
+                  ? "rgba(239,68,68,0.2)"
+                  : "#00d4ff",
+              color:
+                status === "success"
+                  ? "white"
+                  : status === "error"
+                  ? "#ef4444"
+                  : "#050505",
+              fontWeight: 700,
+              fontSize: 14,
+              border: status === "error" ? "1px solid #ef4444" : "none",
+              cursor:
+                status === "loading" || status === "success"
+                  ? "not-allowed"
+                  : "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 8,
+              marginTop: 16,
+              opacity: status === "loading" ? 0.8 : 1,
+              transition: "all 0.3s",
+            }}
+          >
+            {status === "loading" && (
+              <Loader size={16} style={{ animation: "spin 1s linear infinite" }} />
+            )}
+            {status === "success" && <CheckCircle size={16} />}
+            {status === "error" && <AlertCircle size={16} />}
+            {status === "idle" && <Send size={16} />}
+
+            {status === "loading"
+              ? "Sending..."
+              : status === "success"
+              ? "Message Sent!"
+              : status === "error"
+              ? errorMsg || "Failed to send"
+              : "Send Message"}
+          </button>
+        </div>
       </motion.div>
     </section>
   );

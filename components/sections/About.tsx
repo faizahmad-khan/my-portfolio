@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function About() {
@@ -29,7 +30,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-2xl font-bold text-white">Hi, I'm Faiz</h3>
+          <h3 className="text-2xl font-bold text-white">Hi, I&apos;m Faiz</h3>
 
           <p className="text-gray-400 text-sm md:text-base leading-relaxed mt-4">
             A passionate Full-Stack Developer based in Lucknow, India. I build
@@ -123,10 +124,13 @@ export default function About() {
           <span className="text-xs text-gray-500">@faizahmad-khan ↗</span>
         </div>
         <div style={{ overflowX: "auto" }}>
-          <img
+          <Image
             src="https://ghchart.rshah.org/00d4ff/faizahmad-khan"
             alt="GitHub Contributions"
+            width={800}
+            height={200}
             className="w-full mt-4 rounded opacity-90"
+            style={{ width: "100%", height: "auto" }}
           />
         </div>
       </motion.div>

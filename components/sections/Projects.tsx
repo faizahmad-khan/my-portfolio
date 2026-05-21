@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Code, X, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Code, X, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { projects } from "@/data/projects";
 

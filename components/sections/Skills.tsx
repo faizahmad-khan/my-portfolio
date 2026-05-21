@@ -43,8 +43,6 @@ interface SkillItem {
   color: string;
 }
 
-const radius = 300;
-
 const skillsData: SkillItem[] = [
   { name: "React", Icon: SiReact, color: "#61DAFB" },
   { name: "Next.js", Icon: SiNextdotjs, color: "#ffffff" },
@@ -99,8 +97,16 @@ function getPositions(count: number, sphereRadius: number): SpherePosition[] {
   return positions;
 }
 
+function hexToRgb(hex: string): string {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  if (!result) return "0, 212, 255";
+  return `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}`;
+}
+
 export default function Skills() {
   const [scale, setScale] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+  const skillsWithIcons = skillsData;
   const containerRef = useRef<HTMLDivElement | null>(null);
   const badgeRefs = useRef<(HTMLDivElement | null)[]>([]);
   const frameRef = useRef<number | null>(null);
@@ -120,10 +126,17 @@ export default function Skills() {
       else setScale(1);
     };
 
-    updateScale();
-    window.addEventListener("resize", updateScale);
+    const check = () => setIsMobile(window.innerWidth < 1024);
 
-    return () => window.removeEventListener("resize", updateScale);
+    updateScale();
+    check();
+    window.addEventListener("resize", updateScale);
+    window.addEventListener("resize", check);
+
+    return () => {
+      window.removeEventListener("resize", updateScale);
+      window.removeEventListener("resize", check);
+    };
   }, []);
 
   useEffect(() => {
@@ -233,9 +246,155 @@ export default function Skills() {
           <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase mb-3">
             FORGE
           </p>
-          <h2 className="text-3xl md:text-5xl font-bold text-white">Technical Expertise</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Technical Expertise</h2>
+          <p className="text-gray-500 text-sm mt-3 font-mono">
+            {skillsWithIcons.length} technologies & counting
+          </p>
         </div>
 
+        {isMobile ? (
+          <motion.div
+            className="grid gap-3"
+            style={{
+              gridTemplateColumns: "repeat(auto-fill, minmax(80px, 1fr))",
+            }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.03 },
+              },
+            }}
+          >
+            {skillsWithIcons.map((skill, index) => (
+              <motion.div
+                key={skill.name}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.8 },
+                  visible: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: { duration: 0.3 },
+                  },
+                }}
+                whileTap={{ scale: 0.92 }}
+                whileHover={{
+                  scale: 1.12,
+                  transition: { duration: 0.2 },
+                }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 8,
+                  padding: "14px 8px",
+                  borderRadius: 14,
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  cursor: "pointer",
+                  minHeight: 80,
+                  position: "relative",
+                  overflow: "hidden",
+                }}
+                onHoverStart={(event) => {
+                  const el = event.target as HTMLElement;
+                  const card = el.closest("[data-skill-card]") as HTMLElement;
+                  if (card) {
+                    card.style.border = `1px solid ${skill.color}60`;
+                    card.style.boxShadow = `0 0 20px ${skill.color}30, inset 0 0 20px ${skill.color}08`;
+                    card.style.background = `rgba(${hexToRgb(skill.color)}, 0.08)`;
+                  }
+                }}
+                onHoverEnd={(event) => {
+                  const el = event.target as HTMLElement;
+                  const card = el.closest("[data-skill-card]") as HTMLElement;
+                  if (card) {
+                    card.style.border = "1px solid rgba(255,255,255,0.08)";
+                    card.style.boxShadow = "none";
+                    card.style.background = "rgba(255,255,255,0.04)";
+                  }
+                }}
+                data-skill-card
+              >
+                <motion.div
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "0%",
+                    background: `linear-gradient(to top, ${skill.color}25 0%, ${skill.color}10 60%, transparent 100%)`,
+                    borderRadius: 14,
+                    pointerEvents: "none",
+                  }}
+                  whileHover={{
+                    height: "100%",
+                    transition: {
+                      duration: 0.5,
+                      ease: [0.25, 0.46, 0.45, 0.94],
+                    },
+                  }}
+                >
+                </motion.div>
+
+                <motion.div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    borderRadius: 14,
+                    background: `radial-gradient(circle at center, ${skill.color}20 0%, transparent 70%)`,
+                    pointerEvents: "none",
+                    opacity: 0,
+                  }}
+                  whileTap={{
+                    opacity: [0, 1, 0],
+                    scale: [0.8, 1.1, 1],
+                    transition: { duration: 0.4, ease: "easeOut" },
+                  }}
+                />
+
+                <motion.div
+                  style={{ position: "relative", zIndex: 1 }}
+                  whileHover={{
+                    y: -3,
+                    scale: 1.15,
+                    transition: { duration: 0.25 },
+                  }}
+                  whileTap={{
+                    scale: 1.2,
+                    transition: { duration: 0.15 },
+                  }}
+                >
+                  <skill.Icon size={26} color={skill.color} />
+                </motion.div>
+
+                <motion.span
+                  style={{
+                    fontSize: 9,
+                    color: "#9ca3af",
+                    fontFamily: "monospace",
+                    textAlign: "center",
+                    lineHeight: 1.3,
+                    wordBreak: "break-word",
+                    maxWidth: "100%",
+                    padding: "0 2px",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                  whileHover={{
+                    color: skill.color,
+                    transition: { duration: 0.2 },
+                  }}
+                >
+                  {skill.name}
+                </motion.span>
+              </motion.div>
+            ))}
+          </motion.div>
+        ) : (
           <div
             ref={containerRef}
             className="relative mx-auto cursor-grab active:cursor-grabbing overflow-visible"
@@ -253,7 +412,6 @@ export default function Skills() {
             <svg
               viewBox="0 0 560 560"
               width="560"
-              height="560"
               style={{ opacity: 0.15 }}
             >
               {/* Outer circle */}
@@ -341,7 +499,8 @@ export default function Skills() {
               </div>
             </div>
           ))}
-        </div>
+          </div>
+        )}
       </div>
     </motion.section>
   );

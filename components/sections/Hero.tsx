@@ -38,7 +38,7 @@ export default function Hero() {
       {skillBadges.map((skill, i) => (
         <motion.div
           key={skill.name}
-          className="absolute flex flex-col items-center gap-1.5"
+          className="absolute hidden lg:flex flex-col items-center gap-1.5"
           style={{
             ...skill.style,
             background: "rgba(255,255,255,0.04)",
@@ -108,7 +108,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          HELLO! I'M
+          HELLO! I&apos;M
         </motion.p>
 
         {/* Name */}
