@@ -11,6 +11,7 @@ import {
   Mail,
   Send,
 } from "lucide-react";
+import { SiTelegram } from "react-icons/si";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -35,11 +36,11 @@ export default function Contact() {
       url: "https://linkedin.com/in/faiz-khan-aa384a23b",
     },
     {
-      name: "Twitter",
-      icon: Mail,
-      color: "#1DA1F2",
-      handle: "@yourusername",
-      url: "https://twitter.com",
+      name: "Telegram",
+      icon: SiTelegram,
+      color: "#2AABEE",
+      handle: "@faiz_khan_10",
+      url: "https://t.me/faiz_khan_10",
     },
     {
       name: "Email",
