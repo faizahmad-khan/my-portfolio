@@ -41,6 +41,11 @@ html, body {
   max-width: 100vw;
 }
 
+nav, header {
+  z-index: 100 !important;
+  position: fixed;
+}
+
 @media (max-width: 768px) {
   .glass-card {
     border-radius: 12px;
