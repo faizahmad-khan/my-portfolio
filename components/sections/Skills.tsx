@@ -235,7 +235,7 @@ export default function Skills() {
   return (
     <motion.section
       id="skills"
-      className="py-16 px-4 overflow-hidden"
+      className="py-16 md:py-24 px-4 overflow-hidden relative"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -396,14 +396,23 @@ export default function Skills() {
           </motion.div>
         ) : (
           <div
-            ref={containerRef}
-            className="relative mx-auto cursor-grab active:cursor-grabbing overflow-visible"
-            style={{ width: "min(100vw, 750px)", height: "min(100vw, 750px)", marginTop: -80 }}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseLeave}
+            style={{
+              overflow: "hidden",
+              position: "relative",
+              maxWidth: 750,
+              margin: "0 auto",
+              marginTop: -40,
+            }}
           >
+            <div
+              ref={containerRef}
+              className="relative mx-auto cursor-grab active:cursor-grabbing"
+              style={{ width: 750, height: 750 }}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
+            >
           {/* Globe wireframe SVG */}
           <div
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -499,6 +508,7 @@ export default function Skills() {
               </div>
             </div>
           ))}
+            </div>
           </div>
         )}
       </div>
