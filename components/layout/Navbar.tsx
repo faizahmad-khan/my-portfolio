@@ -36,7 +36,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-4 left-0 right-0 z-50 flex justify-center">
+    <nav className="fixed top-4 left-0 right-0 z-50 flex justify-center" style={{ zIndex: 100 }}>
       <div className="bg-black/70 backdrop-blur-xl border border-white/10 rounded-full px-4 py-3 flex items-center justify-between md:justify-start gap-4 md:gap-8 max-w-3xl w-full mx-3 md:mx-4">
 
         <Link
