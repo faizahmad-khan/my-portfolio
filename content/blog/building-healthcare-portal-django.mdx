@@ -1,0 +1,199 @@
+---
+title: "Building a Full-Stack Healthcare Portal to Learn Django Properly"
+date: "May 20, 2026"
+readTime: "11 min read"
+tags: ["Django", "Python", "PostgreSQL"]
+featured: true
+excerpt: "I chose Django for the HealthCare Portal not because it was the easiest option, but because I wanted to learn it by building something real and complex enough to matter. Here is what that taught me."
+---
+
+## Why Django
+
+I had used Flask for small projects before. Flask is minimal and gets out of your way, which is great for learning HTTP basics. But I kept hitting a ceiling — authentication, admin panels, form validation, database migrations — I was reinventing the wheel each time.
+
+Django includes all of that. The philosophy is batteries included, and for a project as domain-heavy as healthcare management, those batteries matter. I wanted to learn Django properly, and the best way I know to learn a framework is to build something with real complexity in it.
+
+The HealthCare Portal became that project.
+
+## What the Portal Manages
+
+The system has five core modules:
+
+**Patients** — full lifecycle management with demographics, emergency contacts, insurance details, medical records, and vital signs. The vitals system automatically computes BMI from height and weight on save.
+
+**Doctors** — directory with specializations, scheduling metadata, and soft deactivation. Soft delete using `is_active=False` rather than hard deletion means doctor history is preserved when they leave.
+
+**Appointments** — scheduling with status workflows (scheduled, confirmed, completed, cancelled), a today view, and one-to-one prescription creation per appointment.
+
+**Pharmacy** — the most complex module. Medicine catalog with categories, stock level tracking, low-stock and expiry alerts, a dispensing workflow that automatically deducts stock, and movement history for every transaction.
+
+**Accounts** — registration, login, logout, profile management, and the main dashboard with aggregate metrics.
+
+## The Data Model That Took Longest
+
+The pharmacy module required the most careful schema design. The relationship between medicines, stock levels, and dispensing transactions needs to be airtight — you cannot dispense what you do not have, and every movement needs to be traceable.
+
+```python
+class Medicine(models.Model):
+    name = models.CharField(max_length=200)
+    category = models.ForeignKey(
+        'MedicineCategory', 
+        on_delete=models.PROTECT
+    )
+    current_stock = models.IntegerField(default=0)
+    reorder_threshold = models.IntegerField(default=10)
+    expiry_date = models.DateField(null=True, blank=True)
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
+    
+    @property
+    def is_low_stock(self):
+        return self.current_stock <= self.reorder_threshold
+    
+    @property  
+    def is_expired(self):
+        if self.expiry_date:
+            return self.expiry_date < date.today()
+        return False
+
+class Dispensing(models.Model):
+    medicine = models.ForeignKey(Medicine, on_delete=models.PROTECT)
+    quantity = models.IntegerField()
+    dispensed_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.PROTECT
+    )
+    dispensed_at = models.DateTimeField(auto_now_add=True)
+    appointment = models.ForeignKey(
+        'appointments.Appointment',
+        on_delete=models.SET_NULL,
+        null=True, blank=True
+    )
+```
+
+The `on_delete=models.PROTECT` on the medicine foreign key was a deliberate choice — you should never be able to delete a medicine that has dispensing history. Django enforces this at the database level.
+
+## Vital Signs and BMI Calculation
+
+The vitals tracking system computes BMI automatically rather than storing it as a raw value:
+
+```python
+class VitalRecord(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    recorded_at = models.DateTimeField(auto_now_add=True)
+    height_cm = models.DecimalField(max_digits=5, decimal_places=1)
+    weight_kg = models.DecimalField(max_digits=5, decimal_places=1)
+    blood_pressure_systolic = models.IntegerField(null=True, blank=True)
+    blood_pressure_diastolic = models.IntegerField(null=True, blank=True)
+    heart_rate = models.IntegerField(null=True, blank=True)
+    temperature_celsius = models.DecimalField(
+        max_digits=4, decimal_places=1, null=True, blank=True
+    )
+    
+    @property
+    def bmi(self):
+        if self.height_cm and self.weight_kg:
+            height_m = float(self.height_cm) / 100
+            return round(float(self.weight_kg) / (height_m ** 2), 1)
+        return None
+    
+    @property
+    def bmi_category(self):
+        bmi = self.bmi
+        if bmi is None:
+            return "Unknown"
+        if bmi < 18.5:
+            return "Underweight"
+        if bmi < 25:
+            return "Normal"
+        if bmi < 30:
+            return "Overweight"
+        return "Obese"
+```
+
+Storing BMI as a computed property rather than a database field means it is always accurate even if height or weight is corrected later.
+
+## Django Admin: Underrated
+
+Before this project I had barely used the Django admin panel. Working on a data-heavy project changed my opinion completely. With minimal configuration, you get a fully functional CRUD interface for every model:
+
+```python
+@admin.register(Medicine)
+class MedicineAdmin(admin.ModelAdmin):
+    list_display = [
+        'name', 'category', 'current_stock', 
+        'reorder_threshold', 'is_low_stock', 'expiry_date'
+    ]
+    list_filter = ['category', 'expiry_date']
+    search_fields = ['name']
+    
+    def is_low_stock(self, obj):
+        return obj.is_low_stock
+    is_low_stock.boolean = True
+    is_low_stock.short_description = 'Low Stock?'
+```
+
+The admin became the primary interface for data management during development, saving weeks of building custom views for every model.
+
+## Deploying Django on Vercel
+
+Vercel is designed for Node.js and static sites. Deploying Django on it requires a few non-obvious pieces.
+
+The key is Mangum — a Python package that wraps a Django ASGI application in an AWS Lambda-compatible handler, which is what Vercel's Python runtime expects:
+
+```python
+# api/asgi.py
+import os
+from django.core.asgi import get_asgi_application
+from mangum import Mangum
+
+os.environ.setdefault(
+    'DJANGO_SETTINGS_MODULE', 
+    'healthcare_dashboard.settings'
+)
+
+application = get_asgi_application()
+handler = Mangum(application, lifespan="off")
+```
+
+The `vercel.json` routes all requests through this handler:
+
+```json
+{
+    "builds": [
+        {
+            "src": "api/asgi.py",
+            "use": "@vercel/python",
+            "config": { "maxLambdaSize": "15mb" }
+        },
+        {
+            "src": "build_files.sh",
+            "use": "@vercel/static-build",
+            "config": { "distDir": "staticfiles" }
+        }
+    ],
+    "routes": [
+        { "src": "/static/(.*)", "dest": "/static/$1" },
+        { "src": "/(.*)", "dest": "api/asgi.py" }
+    ]
+}
+```
+
+The important limitation: Vercel's filesystem is ephemeral. Any user-uploaded media files disappear between deployments. For a production healthcare app, those would need to go to S3 or Supabase Storage. The portal currently uses SQLite locally and PostgreSQL in production via `dj-database-url`.
+
+## What Django Taught Me That Flask Did Not
+
+**Migrations are a gift.** Managing schema changes with `makemigrations` and `migrate` — and having those changes version-controlled alongside the code — makes database evolution safe and repeatable.
+
+**The ORM prevents entire categories of bugs.** Parameterized queries, relationship traversal, aggregations — Django handles the SQL so you focus on the domain logic.
+
+**Class-based views have a learning curve but pay off.** My first instinct was to write function-based views for everything. Once I understood `ListView`, `DetailView`, `CreateView`, and `UpdateView`, common CRUD operations became 10-line files instead of 40-line files.
+
+**`login_required` should be the default, not an afterthought.** I added it consistently from the start, which meant the authentication layer was never a retrofitting problem.
+
+## What Is Still in Progress
+
+The portal is functional but not finished. Role-based access control is the most important missing piece — currently any logged-in user can access any module. A real deployment would need distinct permissions for doctors, nurses, pharmacists, and administrators.
+
+A Django REST Framework API layer is planned for mobile client integration, and background jobs for appointment reminders and low-stock alerts would complete the operational picture.
+
+*The full source is on [GitHub](https://github.com/faizahmad-khan/HealthCare_Project).*
