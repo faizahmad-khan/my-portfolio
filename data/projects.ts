@@ -46,7 +46,7 @@ export const projects = [
     description: "A collection of interactive browser games built with vanilla HTML, CSS, and JavaScript — including Ludo, Snake & Ladder, Tetris, Pac-Man, Space Invaders, Flappy Bird, UNO, and more. All games run offline with no dependencies.",
     techStack: ["HTML5", "CSS3", "JavaScript", "Python", "Canvas API"],
     github: "https://github.com/faizahmad-khan/web-games",
-    link: "https://web-games-collection.onrender.com",
+    link: "https://web-games-collections.onrender.com",
     image: "/webgames.png",
     featured: true,
     status: "Live" as const,
