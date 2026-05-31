@@ -130,6 +130,9 @@ export default function About() {
             width={800}
             height={200}
             className="w-full mt-4 rounded opacity-90"
+            unoptimized
+            loading="eager"
+            fetchPriority="high"
             style={{ width: "100%", height: "auto" }}
           />
         </div>
