@@ -1,0 +1,149 @@
+---
+title: "How I Built Browser Games with Pure HTML, CSS, and JavaScript"
+date: "May 10, 2026"
+readTime: "9 min read"
+tags: ["JavaScript", "HTML5", "CSS3"]
+featured: true
+excerpt: "What started as a fun side project turned into 19 fully playable browser games — from Ludo to Space Invaders to UNO. Here is what I learned building each one from scratch with zero dependencies."
+---
+
+## It Started as a Weekend Project
+
+I did not set out to build games. I built one — a simple Number Guessing game in Python — and then thought: what if I made a browser version? One thing led to another. Six weeks later I had a full collection deployed on Render.
+
+The rule I set for myself: no external game libraries. No Phaser, no Three.js, no game engines. Pure HTML5 Canvas, CSS3, and Vanilla JavaScript. The constraint forced me to actually understand how games work rather than just configuring a framework.
+
+## Where I Started: Python First
+
+The first game was intentionally simple — a Python CLI number guessing game. The player picks a number between 1 and 100, the computer tells them too high or too low, and they narrow it down.
+
+```python
+import random
+
+def play():
+    number = random.randint(1, 100)
+    attempts = 0
+    
+    while True:
+        try:
+            guess = int(input("Enter your guess (1-100): "))
+            attempts += 1
+            
+            if guess < number:
+                print("Too low!")
+            elif guess > number:
+                print("Too high!")
+            else:
+                print(f"Correct! You got it in {attempts} attempts.")
+                break
+        except ValueError:
+            print("Please enter a valid number.")
+
+play()
+```
+
+Simple. But it taught me the game loop pattern — input, process, feedback, repeat — that every game in the collection uses in some form.
+
+## The HTML5 Canvas Learning Curve
+
+Moving to browser games meant learning the Canvas API from scratch. The mental model shift from DOM manipulation to canvas drawing took time.
+
+In DOM development, you create elements and let the browser handle rendering. In canvas, you are responsible for everything — clearing the screen, redrawing every frame, calculating every position.
+
+```javascript
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+function gameLoop() {
+    // Clear everything
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Update state
+    update();
+    
+    // Draw everything from scratch
+    draw();
+    
+    // Schedule next frame
+    requestAnimationFrame(gameLoop);
+}
+```
+
+Every single game in the collection uses this pattern. Once I understood it, building new games became significantly faster.
+
+## The Hardest Game: Castle Defenders
+
+Out of all  games, Castle Defenders was the most complex to build. Tower defense games have multiple systems that all need to talk to each other simultaneously — enemy pathfinding, tower targeting logic, projectile physics, wave spawning, and resource management.
+
+The pathfinding alone took several days. Enemies need to find their way from spawn point to the castle along a grid, but the path changes as towers are placed. I implemented a basic A* pathfinding algorithm:
+
+```javascript
+function findPath(grid, start, end) {
+    const openSet = [start];
+    const cameFrom = {};
+    const gScore = { [start]: 0 };
+    const fScore = { [start]: heuristic(start, end) };
+    
+    while (openSet.length > 0) {
+        const current = openSet.reduce((a, b) => 
+            fScore[a] < fScore[b] ? a : b
+        );
+        
+        if (current === end) return reconstructPath(cameFrom, current);
+        
+        openSet.splice(openSet.indexOf(current), 1);
+        
+        for (const neighbor of getNeighbors(grid, current)) {
+            const tentativeG = gScore[current] + 1;
+            if (tentativeG < (gScore[neighbor] ?? Infinity)) {
+                cameFrom[neighbor] = current;
+                gScore[neighbor] = tentativeG;
+                fScore[neighbor] = tentativeG + heuristic(neighbor, end);
+                if (!openSet.includes(neighbor)) openSet.push(neighbor);
+            }
+        }
+    }
+    return null;
+}
+```
+
+The tower targeting system had its own complexity — each tower needs to find the nearest enemy within range, track it as it moves, and fire at a calculated intercept point rather than the enemy's current position. Leading a moving target mathematically is more involved than it sounds.
+
+## Games That Surprised Me
+
+**Pac-Man** was harder than expected because of ghost AI. The original Pac-Man ghosts each use different targeting strategies — Blinky chases directly, Pinky targets four tiles ahead, Inky uses a complex calculation involving Blinky's position, and Clyde switches between chasing and scattering. I simplified the AI but kept the core behavior distinct per ghost.
+
+**Ludo** required implementing an entire ruleset — six to unlock, extra turn on six, safe zones, capture mechanics, the home stretch path. Board games have more edge cases than arcade games.
+
+**UNO** was the most state-heavy. Managing a hand of cards, special card effects (Draw Two, Wild Draw Four, Skip, Reverse), turn order, and AI opponents for 2-4 players required careful state management.
+
+## What No Dependencies Actually Teaches You
+
+Building without libraries means you implement things from first principles. Collision detection, sprite animation, game state machines, score persistence with localStorage — all of it is yours to figure out.
+
+The localStorage pattern for high scores became consistent across all games:
+
+```javascript
+function saveHighScore(score) {
+    const current = parseInt(localStorage.getItem('highScore') || '0');
+    if (score > current) {
+        localStorage.setItem('highScore', score.toString());
+        return true; // new record
+    }
+    return false;
+}
+```
+
+Shipping code that actually runs in a browser with no build step, no npm install, no configuration — just open the HTML file and play — reminded me that the web platform itself is remarkably capable.
+
+## Deploying Games at Once
+
+The collection is deployed on Render as a static site. The portal `index.html` links to each game folder. Since everything is static HTML/CSS/JS, deployment is trivial — no server, no database, no build process.
+
+The only constraint: all game files for a given game must stay in the same folder, since they reference each other with relative paths.
+
+## What Is Next
+
+The roadmap includes online multiplayer for Ludo and UNO using WebSockets, a unified leaderboard with cloud storage, and sound effects across all games. The foundation is solid — each game is self-contained and can be enhanced independently.
+
+*Play all  games at [web-games-collection.onrender.com](https://web-games-collection.onrender.com). The code is on [GitHub](https://github.com/faizahmad-khan/web-games).*
