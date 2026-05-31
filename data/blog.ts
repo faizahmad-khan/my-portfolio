@@ -1,5 +1,23 @@
 export const blogPosts = [
   {
+    slug: "building-web-games-collection",
+    title: "How I Built 19 Browser Games with Pure HTML, CSS, and JavaScript",
+    excerpt: "What started as a fun side project turned into 19 fully playable browser games — from Ludo to Space Invaders to UNO. Here is what I learned building each one from scratch with zero dependencies.",
+    date: "May 10, 2026",
+    readTime: "9 min read",
+    tags: ["JavaScript", "HTML5", "CSS3"],
+    featured: true,
+  },
+  {
+    slug: "building-healthcare-portal-django",
+    title: "Building a Full-Stack Healthcare Portal to Learn Django Properly",
+    excerpt: "I chose Django for the HealthCare Portal not because it was the easiest option, but because I wanted to learn it by building something real. Here is what that taught me.",
+    date: "May 20, 2026",
+    readTime: "11 min read",
+    tags: ["Django", "Python", "PostgreSQL"],
+    featured: true,
+  },
+  {
     slug: "building-project-netra",
     title: "How I Built an Adaptive Traffic System Using YOLOv8",
     excerpt:
