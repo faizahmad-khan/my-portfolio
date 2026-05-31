@@ -4,69 +4,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { ArrowDown, FileText } from "lucide-react";
-import {
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiNodedotjs,
-  SiFastapi,
-  SiDocker,
-  SiGit,
-  SiPython,
-} from "react-icons/si";
-import { SiOpenai } from "react-icons/si";
-
-const skillBadges = [
-  { name: "React", Icon: SiReact, color: "#61DAFB", style: { top: "14%", left: "30%" } },
-  { name: "Next.js", Icon: SiNextdotjs, color: "#ffffff", style: { top: "10%", left: "55%" } },
-  { name: "TypeScript", Icon: SiTypescript, color: "#3178C6", style: { top: "26%", right: "8%" } },
-  { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4", style: { top: "42%", left: "6%" } },
-  { name: "Node.js", Icon: SiNodedotjs, color: "#339933", style: { top: "62%", left: "16%" } },
-  { name: "Python", Icon: SiPython, color: "#3776AB", style: { top: "20%", right: "16%" } },
-  { name: "FastAPI", Icon: SiFastapi, color: "#009688", style: { bottom: "18%", left: "28%" } },
-  { name: "Docker", Icon: SiDocker, color: "#2496ED", style: { bottom: "12%", right: "22%" } },
-  { name: "Git", Icon: SiGit, color: "#F05032", style: { bottom: "24%", right: "8%" } },
-  { name: "LangChain", Icon: SiOpenai, color: "#00d4ff", style: { top: "14%", left: "8%" } },
-];
 
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-
-      {/* ── Skill Badges (fixed scatter, hidden on mobile) ── */}
-      {skillBadges.map((skill, i) => (
-        <motion.div
-          key={skill.name}
-          className="absolute hidden lg:flex flex-col items-center gap-1.5"
-          style={{
-            ...skill.style,
-            background: "rgba(255,255,255,0.04)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            borderRadius: "16px",
-            padding: "10px 14px",
-            width: "88px",
-            backdropFilter: "blur(8px)",
-            animation: `float 6s ease-in-out ${i * 0.5}s infinite`,
-          }}
-          initial={{ opacity: 0, scale: 0.7 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 + i * 0.08, duration: 0.5 }}
-        >
-          <skill.Icon size={22} color={skill.color} />
-          <span
-            style={{
-              fontSize: "10px",
-              color: "#9ca3af",
-              fontFamily: "monospace",
-              textAlign: "center",
-              lineHeight: 1.2,
-            }}
-          >
-            {skill.name}
-          </span>
-        </motion.div>
-      ))}
 
       {/* ── Center Content ── */}
       <div className="relative z-10 flex flex-col items-center text-center gap-3 px-6 md:px-4 max-w-4xl w-full">
