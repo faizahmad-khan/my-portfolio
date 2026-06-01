@@ -16,6 +16,7 @@ export const blogPosts = [
     readTime: "11 min read",
     tags: ["Django", "Python", "PostgreSQL"],
     featured: true,
+    image: "/healthcare.png",
   },
   {
     slug: "building-project-netra",
