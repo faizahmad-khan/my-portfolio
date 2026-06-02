@@ -1,20 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Activity, Image as GalleryImage, Monitor, X, Users } from "lucide-react";
+import { useState } from "react";
+import { Activity, Image as GalleryImage, Monitor, X } from "lucide-react";
+import VisitorBadge from "@/components/ui/VisitorBadge";
 import { projects } from "@/data/projects";
 
 export default function Footer() {
-  const [visitorCount, setVisitorCount] = useState<number | null>(null);
   const [showGallery, setShowGallery] = useState(false);
   const [showMonitor, setShowMonitor] = useState(false);
-
-  useEffect(() => {
-    fetch("/api/visitors", { method: "POST" })
-      .then((r) => r.json())
-      .then((data) => setVisitorCount(data.count));
-  }, []);
 
   return (
     <>
@@ -27,29 +21,7 @@ export default function Footer() {
 
           {/* Right */}
           <div className="flex flex-wrap justify-center gap-2">
-            <button
-              onClick={() => {
-                fetch("/api/visitors")
-                  .then((r) => r.json())
-                  .then((data) => setVisitorCount(data.count));
-              }}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "#6b7280",
-                fontSize: 11,
-                padding: "6px 14px",
-                borderRadius: 9999,
-                background: "transparent",
-                cursor: "pointer",
-                fontFamily: "monospace",
-              }}
-            >
-              <Users size={12} />
-              {visitorCount !== null ? `${visitorCount} Visitors` : "Visitors"}
-            </button>
+            <VisitorBadge />
             <button
               onClick={() => setShowGallery(true)}
               style={{
@@ -259,7 +231,7 @@ export default function Footer() {
               { label: "Status", value: "Online", color: "#22c55e" },
               {
                 label: "Total Visitors",
-                value: visitorCount !== null ? visitorCount.toString() : "...",
+                value: "See badge →",
                 color: "#00d4ff",
               },
               {
