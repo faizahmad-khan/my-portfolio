@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Code, X, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { projects } from "@/data/projects";
+import GameTeaser from "@/components/ui/GameTeaser";
 
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
@@ -256,6 +257,41 @@ export default function Projects() {
           </motion.div>
         ))}
       </motion.div>
+
+      <div style={{ marginTop: 48 }}>
+        <p
+          style={{
+            fontSize: 12,
+            fontFamily: "monospace",
+            color: "#00d4ff",
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            marginBottom: 16,
+          }}
+        >
+          Play Instantly
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 20,
+          }}
+        >
+          <GameTeaser
+            title="Castle Defenders"
+            description="A tower defense game with A* pathfinding enemies, dynamic targeting towers, and wave-based progression. The most complex game in the collection."
+            embedUrl="https://castle-defenders.onrender.com"
+            thumbnailColor="#22c55e"
+          />
+          <GameTeaser
+            title="Space Invaders"
+            description="A retro arcade shooter rebuilt from scratch with HTML5 Canvas — progressive difficulty, mystery ships, and destructible barriers."
+            embedUrl="https://space-invaders-e95g.onrender.com"
+            thumbnailColor="#a855f7"
+          />
+        </div>
+      </div>
 
       {/* Show more/less */}
       <div className="mt-12 text-center">
