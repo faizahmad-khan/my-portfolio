@@ -115,6 +115,8 @@ my-portfolio/
 
 ## 🌐 Deployment
 
+This message is to trigger the deployment
+
 ### Deploy on Netlify
 
 1. **Push your code to GitHub**
