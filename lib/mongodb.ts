@@ -1,25 +1,48 @@
 import { MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI;
-const options = {};
 
-let clientPromise: Promise<MongoClient>;
+let client: MongoClient | null = null;
+let clientPromise: Promise<MongoClient> | null = null;
 
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-if (!uri) {
-  clientPromise = Promise.reject(
-    new Error("MONGODB_URI environment variable is not set")
-  );
-} else if (process.env.NODE_ENV === "development") {
-  if (!global._mongoClientPromise) {
-    global._mongoClientPromise = new MongoClient(uri, options).connect();
+function getClientPromise(): Promise<MongoClient> {
+  if (!uri) {
+    return Promise.reject(
+      new Error("MONGODB_URI environment variable is not set")
+    );
   }
-  clientPromise = global._mongoClientPromise;
-} else {
-  clientPromise = new MongoClient(uri, options).connect();
+
+  if (process.env.NODE_ENV === "development") {
+    if (!global._mongoClientPromise) {
+      client = new MongoClient(uri, {});
+      global._mongoClientPromise = client.connect().catch((err) => {
+        console.error("MongoDB connection failed:", err.message);
+        throw err;
+      });
+    }
+    return global._mongoClientPromise;
+  }
+
+  if (!clientPromise) {
+    client = new MongoClient(uri, {});
+    clientPromise = client.connect().catch((err) => {
+      console.error("MongoDB connection failed:", err.message);
+      clientPromise = null; // allow retry on next request
+      throw err;
+    });
+  }
+  return clientPromise;
 }
 
-export default clientPromise;
+const lazyClientPromise = {
+  then: (...args: Parameters<Promise<MongoClient>["then"]>) =>
+    getClientPromise().then(...args),
+  catch: (...args: Parameters<Promise<MongoClient>["catch"]>) =>
+    getClientPromise().catch(...args),
+} as Promise<MongoClient>;
+
+export default lazyClientPromise;
