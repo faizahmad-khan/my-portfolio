@@ -51,7 +51,7 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
   return (
     <section ref={sectionRef} id="blog" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
       {/* Eyebrow */}
-      <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
+      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
         WRITING & THOUGHTS
       </p>
 
@@ -73,7 +73,7 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
             style={{ textDecoration: "none", display: "block" }}
           >
             <motion.div
-              className="glass-card p-6 hover:border-cyan-400/30 transition-all duration-300 group cursor-pointer"
+              className="glass-card p-6 hover:border-amber-400/30 transition-all duration-300 group cursor-pointer"
               variants={cardVariants}
             >
             <div
@@ -92,8 +92,8 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
                   style={{
                     fontSize: 9,
                     fontFamily: "monospace",
-                    color: "#00d4ff",
-                    border: "1px solid rgba(0,212,255,0.3)",
+                    color: "#f5a623",
+                    border: "1px solid rgba(245,166,35,0.3)",
                     borderRadius: 9999,
                     padding: "2px 8px",
                     letterSpacing: "0.1em",
@@ -105,7 +105,7 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
             </div>
 
             {/* Title */}
-            <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors">
+            <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
               {post.title}
             </h3>
 
@@ -138,7 +138,7 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
       {!defaultShowAll && (
         <button
           onClick={() => setShowAll(!showAll)}
-          className="mt-8 text-cyan-400 hover:text-cyan-300 text-sm font-mono transition-colors flex items-center gap-2 mx-auto"
+          className="mt-8 text-amber-400 hover:text-amber-300 text-sm font-mono transition-colors flex items-center gap-2 mx-auto"
         >
           {showAll ? "← Show Less" : "View All Posts →"}
         </button>

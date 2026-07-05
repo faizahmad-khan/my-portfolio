@@ -1,4 +1,3 @@
-import StarfieldBackground from "@/components/ui/StarfieldBackground";
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
 import Projects from "@/components/sections/Projects";
@@ -12,7 +11,6 @@ import Footer from "@/components/layout/Footer";
 export default function Home() {
   return (
     <main className="relative">
-      <StarfieldBackground />
       <div className="relative z-10">
         <Navbar />
         <Hero />

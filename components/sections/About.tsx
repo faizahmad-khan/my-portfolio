@@ -14,7 +14,7 @@ export default function About() {
   return (
     <section id="about" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
       {/* Eyebrow */}
-      <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
+      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
         WHO I AM
       </p>
 
@@ -64,8 +64,8 @@ export default function About() {
           {/* Education Card */}
           <div className="glass-card p-6">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 bg-cyan-400/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <span className="text-cyan-400 font-bold font-mono text-sm">
+              <div className="w-12 h-12 bg-amber-400/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                <span className="text-amber-400 font-bold font-mono text-sm">
                   🎓
                 </span>
               </div>
@@ -73,11 +73,11 @@ export default function About() {
                 <h4 className="font-bold text-white">
                   Bachelor of Technology
                 </h4>
-                <p className="text-cyan-400 text-sm mt-1">
+                <p className="text-amber-400 text-sm mt-1">
                   Babu Banarasi Das University
                 </p>
                 <p className="text-gray-500 text-sm mt-1">2023 — 2027</p>
-                <div className="border border-cyan-400/30 rounded-full px-3 py-1 text-cyan-400 text-sm inline-block mt-3">
+                <div className="border border-amber-400/30 rounded-full px-3 py-1 text-amber-400 text-sm inline-block mt-3">
                   GPA: 7.0 / 10
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
           >
-            <p className="text-2xl md:text-3xl font-bold text-cyan-400">{stat.number}</p>
+            <p className="text-2xl md:text-3xl font-bold text-amber-400">{stat.number}</p>
             <p className="text-xs text-gray-500 mt-1">{stat.label}</p>
           </motion.div>
         ))}

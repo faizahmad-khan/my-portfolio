@@ -47,7 +47,7 @@ const skillsData: SkillItem[] = [
   { name: "React", Icon: SiReact, color: "#61DAFB" },
   { name: "Next.js", Icon: SiNextdotjs, color: "#ffffff" },
   { name: "TypeScript", Icon: SiTypescript, color: "#3178C6" },
-  { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "Tailwind", Icon: SiTailwindcss, color: "#e8960f" },
   { name: "HTML", Icon: SiHtml5, color: "#E34F26" },
   { name: "CSS", Icon: SiCss, color: "#1572B6" },
   { name: "Node.js", Icon: SiNodedotjs, color: "#339933" },
@@ -65,7 +65,7 @@ const skillsData: SkillItem[] = [
   { name: "Netlify", Icon: SiNetlify, color: "#00C7B7" },
   { name: "Render", Icon: SiNetlify, color: "#46E3B7" },
   { name: "Streamlit", Icon: SiStreamlit, color: "#FF0000" },
-  { name: "LangChain", Icon: SiLangchain, color: "#00d4ff" },
+  { name: "LangChain", Icon: SiLangchain, color: "#f5a623" },
   { name: "TensorFlow", Icon: SiTensorflow, color: "#FF6F00" },
   { name: "OpenCV", Icon: SiOpencv, color: "#5C3EE8" },
   { name: "MediaPipe", Icon: SiGoogle, color: "#0097A7" },
@@ -243,7 +243,7 @@ export default function Skills() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase mb-3">
+          <p className="text-xs font-mono text-amber-400 tracking-widest uppercase mb-3">
             FORGE
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Technical Expertise</h2>
@@ -425,39 +425,39 @@ export default function Skills() {
             >
               {/* Outer circle */}
               <circle cx="280" cy="280" r="278"
-                stroke="#00d4ff" strokeWidth="0.8" fill="none" />
+                stroke="#f5a623" strokeWidth="0.8" fill="none" />
 
               {/* Horizontal latitude lines */}
               <ellipse cx="280" cy="280" rx="278" ry="45"
-                stroke="#00d4ff" strokeWidth="0.6" fill="none" />
+                stroke="#f5a623" strokeWidth="0.6" fill="none" />
               <ellipse cx="280" cy="280" rx="278" ry="112"
-                stroke="#00d4ff" strokeWidth="0.6" fill="none" />
+                stroke="#f5a623" strokeWidth="0.6" fill="none" />
               <ellipse cx="280" cy="280" rx="278" ry="186"
-                stroke="#00d4ff" strokeWidth="0.6" fill="none" />
+                stroke="#f5a623" strokeWidth="0.6" fill="none" />
               <ellipse cx="280" cy="280" rx="278" ry="247"
-                stroke="#00d4ff" strokeWidth="0.6" fill="none" />
+                stroke="#f5a623" strokeWidth="0.6" fill="none" />
 
               {/* Vertical longitude lines */}
               <ellipse cx="280" cy="280" rx="45" ry="278"
-                stroke="#00d4ff" strokeWidth="0.6" fill="none" />
+                stroke="#f5a623" strokeWidth="0.6" fill="none" />
               <ellipse cx="280" cy="280" rx="112" ry="278"
-                stroke="#00d4ff" strokeWidth="0.6" fill="none" />
+                stroke="#f5a623" strokeWidth="0.6" fill="none" />
               <ellipse cx="280" cy="280" rx="186" ry="278"
-                stroke="#00d4ff" strokeWidth="0.6" fill="none" />
+                stroke="#f5a623" strokeWidth="0.6" fill="none" />
               <ellipse cx="280" cy="280" rx="247" ry="278"
-                stroke="#00d4ff" strokeWidth="0.6" fill="none" />
+                stroke="#f5a623" strokeWidth="0.6" fill="none" />
 
               {/* Tilted diagonal lines for depth feel */}
               <ellipse cx="280" cy="280" rx="278" ry="101"
-                stroke="#00d4ff" strokeWidth="0.4" fill="none"
+                stroke="#f5a623" strokeWidth="0.4" fill="none"
                 transform="rotate(45 280 280)" />
               <ellipse cx="280" cy="280" rx="278" ry="101"
-                stroke="#00d4ff" strokeWidth="0.4" fill="none"
+                stroke="#f5a623" strokeWidth="0.4" fill="none"
                 transform="rotate(-45 280 280)" />
 
               {/* Center glow dot */}
-              <circle cx="280" cy="280" r="4" fill="#00d4ff" opacity="0.8" />
-              <circle cx="280" cy="280" r="13" fill="#00d4ff" opacity="0.1" />
+              <circle cx="280" cy="280" r="4" fill="#f5a623" opacity="0.8" />
+              <circle cx="280" cy="280" r="13" fill="#f5a623" opacity="0.1" />
             </svg>
           </div>
 
@@ -470,7 +470,7 @@ export default function Skills() {
               width: 380,
               height: 380,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(245,166,35,0.04) 0%, transparent 70%)",
             }} />
           </div>
 

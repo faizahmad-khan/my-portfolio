@@ -45,7 +45,7 @@ export default function Contact() {
     {
       name: "Email",
       icon: Mail,
-      color: "#00d4ff",
+      color: "#f5a623",
       handle: "amanfaiz92@gmail.com",
       url: "mailto:amanfaiz92@gmail.com",
     },
@@ -89,7 +89,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-16 px-4 md:py-24 max-w-5xl mx-auto overflow-x-hidden">
       {/* Eyebrow */}
-      <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
+      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
         GET IN TOUCH
       </p>
 
@@ -115,7 +115,7 @@ export default function Contact() {
             <motion.a
               key={social.name}
               href={social.url}
-              className="glass-card p-6 hover:border-cyan-400/30 hover:glow-border transition-all cursor-pointer"
+              className="glass-card p-6 hover:border-amber-400/30 hover:glow-border transition-all cursor-pointer"
               style={{ minWidth: 0 }}
               whileHover={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }}
@@ -152,7 +152,7 @@ export default function Contact() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Faiz Ahmad Khan"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-amber-400/50 focus:outline-none focus:bg-white/8 transition-all"
               style={{ fontSize: 16 }}
             />
           </div>
@@ -166,7 +166,7 @@ export default function Contact() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="amanfaiz92@gmail.com"
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-amber-400/50 focus:outline-none focus:bg-white/8 transition-all"
               style={{ fontSize: 16 }}
             />
           </div>
@@ -180,7 +180,7 @@ export default function Contact() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Your message here..."
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-cyan-400/50 focus:outline-none focus:bg-white/8 transition-all resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:border-amber-400/50 focus:outline-none focus:bg-white/8 transition-all resize-none"
               style={{ fontSize: 16 }}
             />
           </div>
@@ -211,7 +211,7 @@ export default function Contact() {
                   ? "#22c55e"
                   : status === "error"
                   ? "rgba(239,68,68,0.2)"
-                  : "#00d4ff",
+                  : "#f5a623",
               color:
                 status === "success"
                   ? "white"

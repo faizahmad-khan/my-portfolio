@@ -7,7 +7,7 @@ export default function Experience() {
   return (
     <section id="experience" className="py-16 px-4 max-w-4xl mx-auto overflow-x-hidden">
       {/* Eyebrow */}
-      <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
+      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
         EDUCATION & WORK
       </p>
 
@@ -17,7 +17,7 @@ export default function Experience() {
       {/* Timeline */}
       <div className="relative ml-4 mt-12 max-w-4xl mx-auto px-4">
         {/* Timeline Line */}
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-cyan-400/20" />
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-amber-400/20" />
 
         {/* Timeline Items */}
         {experiences.map((exp, idx) => (
@@ -30,15 +30,15 @@ export default function Experience() {
             transition={{ duration: 0.6, delay: idx * 0.1 }}
           >
             {/* Timeline Dot */}
-            <div className="absolute left-0 top-1 w-3 h-3 rounded-full bg-cyan-400 -translate-x-1/2 shadow-lg shadow-cyan-400/50" />
+            <div className="absolute left-0 top-1 w-3 h-3 rounded-full bg-amber-400 -translate-x-1/2 shadow-lg shadow-amber-400/50" />
 
             {/* Period Tag */}
-            <p className="text-xs font-mono text-cyan-400 mb-2">{exp.period}</p>
+            <p className="text-xs font-mono text-amber-400 mb-2">{exp.period}</p>
 
             {/* Card */}
             <div className="glass-card p-6 overflow-hidden" style={{ wordBreak: "break-word" }}>
               {/* Type Badge */}
-              <p className="text-xs font-mono text-cyan-400/60 tracking-widest uppercase mb-2">
+              <p className="text-xs font-mono text-amber-400/60 tracking-widest uppercase mb-2">
                 {exp.type === "education" ? "Education" : "Work"}
               </p>
 
@@ -59,7 +59,7 @@ export default function Experience() {
                   {exp.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="bg-white/10 text-cyan-300 text-xs px-2 py-0.5 rounded-full font-mono"
+                      className="bg-white/10 text-amber-300 text-xs px-2 py-0.5 rounded-full font-mono"
                     >
                       {tech}
                     </span>
@@ -69,7 +69,7 @@ export default function Experience() {
 
               {/* GPA Badge */}
               {exp.type === "education" && exp.gpa && (
-                <div className="border border-cyan-400/30 rounded-full px-3 py-1 text-cyan-400 text-xs inline-block mt-4">
+                <div className="border border-amber-400/30 rounded-full px-3 py-1 text-amber-400 text-xs inline-block mt-4">
                   GPA: {exp.gpa}
                 </div>
               )}

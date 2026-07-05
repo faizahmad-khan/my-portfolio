@@ -42,7 +42,7 @@ export default function GameTeaser({ title, description, embedUrl, thumbnailColo
               width: 56,
               height: 56,
               borderRadius: "50%",
-              background: "rgba(0,212,255,0.9)",
+              background: "rgba(245,166,35,0.9)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -96,7 +96,7 @@ export default function GameTeaser({ title, description, embedUrl, thumbnailColo
             alignItems: "center",
             gap: 6,
             fontSize: 11,
-            color: "#67e8f9",
+            color: "#fbbf24",
             fontFamily: "monospace",
             textDecoration: "none",
           }}
