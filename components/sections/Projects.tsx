@@ -15,7 +15,7 @@ export default function Projects() {
   return (
     <section id="projects" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
       {/* Header */}
-      <p className="text-xs font-mono text-cyan-400 tracking-widest uppercase">
+      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
         FEATURED WORK
       </p>
       <h2 className="text-3xl md:text-5xl font-bold text-white mt-2 mb-12">Projects</h2>
@@ -127,7 +127,7 @@ export default function Projects() {
                       {project.techStack.slice(0, 3).map((tech) => (
                         <span key={tech} style={{
                           background: "rgba(255,255,255,0.08)",
-                          color: "#67e8f9",
+                          color: "#fbbf24",
                           fontSize: 10,
                           padding: "2px 8px",
                           borderRadius: 9999,
@@ -160,8 +160,8 @@ export default function Projects() {
                   transform: "rotateY(180deg)",
                   borderRadius: 16,
                   overflow: "hidden",
-                  background: "rgba(0,212,255,0.04)",
-                  border: "1px solid rgba(0,212,255,0.2)",
+                  background: "rgba(245,166,35,0.04)",
+                  border: "1px solid rgba(245,166,35,0.2)",
                   padding: 24,
                   display: "flex",
                   flexDirection: "column",
@@ -176,11 +176,11 @@ export default function Projects() {
                     </h3>
                     <div style={{
                       width: 28, height: 28, borderRadius: "50%",
-                      background: "rgba(0,212,255,0.1)",
+                      background: "rgba(245,166,35,0.1)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       flexShrink: 0,
                     }}>
-                      <X size={14} color="#00d4ff" />
+                      <X size={14} color="#f5a623" />
                     </div>
                   </div>
                   <p style={{
@@ -195,13 +195,13 @@ export default function Projects() {
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
                     {project.techStack.map((tech) => (
                       <span key={tech} style={{
-                        background: "rgba(0,212,255,0.08)",
-                        color: "#67e8f9",
+                        background: "rgba(245,166,35,0.08)",
+                        color: "#fbbf24",
                         fontSize: 10,
                         padding: "3px 10px",
                         borderRadius: 9999,
                         fontFamily: "monospace",
-                        border: "1px solid rgba(0,212,255,0.15)",
+                        border: "1px solid rgba(245,166,35,0.15)",
                       }}>
                         {tech}
                       </span>
@@ -243,7 +243,7 @@ export default function Projects() {
                           textDecoration: "none",
                           padding: "6px 14px",
                           borderRadius: 9999,
-                          background: "#00d4ff",
+                          background: "#f5a623",
                         }}
                       >
                         <ArrowUpRight size={13} />
@@ -263,7 +263,7 @@ export default function Projects() {
           style={{
             fontSize: 12,
             fontFamily: "monospace",
-            color: "#00d4ff",
+            color: "#f5a623",
             letterSpacing: "0.15em",
             textTransform: "uppercase",
             marginBottom: 16,
@@ -297,7 +297,7 @@ export default function Projects() {
       <div className="mt-12 text-center">
         <button
           onClick={() => setShowAll(!showAll)}
-          className="text-cyan-400 hover:text-cyan-300 text-sm font-mono 
+          className="text-amber-400 hover:text-amber-300 text-sm font-mono 
             transition-colors flex items-center gap-2 mx-auto"
         >
           {showAll ? "← Show Less" : "View All Projects →"}

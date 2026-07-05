@@ -1,7 +1,6 @@
 import { getPostBySlug, getAllPosts } from "@/lib/blog";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
-import StarfieldBackground from "@/components/ui/StarfieldBackground";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { ArrowLeft } from "lucide-react";
@@ -34,14 +33,13 @@ export default async function BlogPostPage({
 
   return (
     <main className="relative min-h-screen">
-      <StarfieldBackground />
       <div className="relative z-10">
         <Navbar />
         <article className="max-w-3xl mx-auto px-4 pt-32 pb-24">
           <Link
             href="/blog"
             className="flex items-center gap-2 text-gray-500
-              hover:text-cyan-400 text-sm font-mono mb-12
+              hover:text-amber-400 text-sm font-mono mb-12
               transition-colors w-fit"
           >
             <ArrowLeft size={14} />
@@ -72,9 +70,9 @@ export default async function BlogPostPage({
                   style={{
                     fontSize: 11,
                     fontFamily: "monospace",
-                    color: "#67e8f9",
-                    background: "rgba(0,212,255,0.08)",
-                    border: "1px solid rgba(0,212,255,0.15)",
+                    color: "#fbbf24",
+                    background: "rgba(245,166,35,0.08)",
+                    border: "1px solid rgba(245,166,35,0.15)",
                     borderRadius: 9999,
                     padding: "3px 10px",
                   }}

@@ -62,11 +62,11 @@ export default function AIChatWidget() {
           width: 56,
           height: 56,
           borderRadius: "50%",
-          background: "#00d4ff",
+          background: "#f5a623",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "0 4px 20px rgba(0,212,255,0.4)",
+          boxShadow: "0 4px 20px rgba(245,166,35,0.4)",
           border: "none",
           cursor: "pointer",
         }}
@@ -107,7 +107,7 @@ export default function AIChatWidget() {
                 gap: 10,
               }}
             >
-              <Sparkles size={16} color="#00d4ff" />
+              <Sparkles size={16} color="#f5a623" />
               <div>
                 <p style={{ color: "white", fontSize: 13, fontWeight: 600 }}>Ask about Faiz</p>
                 <p style={{ color: "#6b7280", fontSize: 11 }}>Quick answers about his work</p>
@@ -132,7 +132,7 @@ export default function AIChatWidget() {
                     alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
                     maxWidth: "85%",
                     background: msg.role === "user"
-                      ? "#00d4ff"
+                      ? "#f5a623"
                       : "rgba(255,255,255,0.06)",
                     color: msg.role === "user" ? "#050505" : "#e5e7eb",
                     padding: "10px 14px",
@@ -181,9 +181,9 @@ export default function AIChatWidget() {
                         textAlign: "left",
                         padding: "8px 12px",
                         borderRadius: 10,
-                        border: "1px solid rgba(0,212,255,0.2)",
-                        background: "rgba(0,212,255,0.05)",
-                        color: "#67e8f9",
+                        border: "1px solid rgba(245,166,35,0.2)",
+                        background: "rgba(245,166,35,0.05)",
+                        color: "#fbbf24",
                         fontSize: 12,
                         cursor: "pointer",
                       }}
@@ -226,7 +226,7 @@ export default function AIChatWidget() {
                   width: 40,
                   height: 40,
                   borderRadius: 10,
-                  background: "#00d4ff",
+                  background: "#f5a623",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
