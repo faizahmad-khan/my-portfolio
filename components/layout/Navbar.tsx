@@ -44,7 +44,7 @@ export default function Navbar() {
           onClick={(e) => handleNavLinkClick(e, navLinks[0])}
           className="md:hidden flex items-center gap-2 text-white text-sm font-semibold tracking-[0.25em]"
         >
-          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-cyan-400/40 text-cyan-400 text-[10px] tracking-[0.2em]">
+          <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-amber-400/40 text-amber-400 text-[10px] tracking-[0.2em]">
             FK
           </span>
           <span>FAIZ</span>
@@ -62,7 +62,7 @@ export default function Navbar() {
                 onClick={(e) => handleNavLinkClick(e, link)}
                 className={
                   isActive
-                    ? "text-cyan-400 text-[10px] lg:text-xs uppercase tracking-wider font-medium"
+                    ? "text-amber-400 text-[10px] lg:text-xs uppercase tracking-wider font-medium"
                     : "text-gray-400 text-[10px] lg:text-xs uppercase tracking-wider hover:text-white transition-colors"
                 }
               >
@@ -75,7 +75,7 @@ export default function Navbar() {
         {/* Resume Button */}
         <a
           href="/resume.pdf"
-          className="hidden md:flex items-center gap-2 border border-cyan-400/50 text-cyan-400 text-xs px-4 py-1.5 rounded-full hover:bg-cyan-400/10 transition-all whitespace-nowrap"
+          className="hidden md:flex items-center gap-2 border border-amber-400/50 text-amber-400 text-xs px-4 py-1.5 rounded-full hover:bg-amber-400/10 transition-all whitespace-nowrap"
         >
           Resume <ExternalLink size={12} />
         </a>
@@ -106,7 +106,7 @@ export default function Navbar() {
                   onClick={(e) => handleNavLinkClick(e, link)}
                   className={
                     isActive
-                      ? "py-3 px-4 text-sm text-cyan-400 border-b border-white/5 uppercase tracking-wider font-medium last:border-b-0"
+                      ? "py-3 px-4 text-sm text-amber-400 border-b border-white/5 uppercase tracking-wider font-medium last:border-b-0"
                       : "py-3 px-4 text-sm text-gray-300 border-b border-white/5 uppercase tracking-wider hover:text-white transition-colors last:border-b-0"
                   }
                 >
@@ -118,7 +118,7 @@ export default function Navbar() {
               <a
                 href="/resume.pdf"
                 onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-center gap-2 w-full text-center py-3 px-4 rounded-xl border border-cyan-400/50 text-cyan-400 text-sm hover:bg-cyan-400/10 transition-all"
+                className="flex items-center justify-center gap-2 w-full text-center py-3 px-4 rounded-xl border border-amber-400/50 text-amber-400 text-sm hover:bg-amber-400/10 transition-all"
               >
                 Resume <ExternalLink size={12} />
               </a>

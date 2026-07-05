@@ -73,7 +73,14 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
             style={{ textDecoration: "none", display: "block" }}
           >
             <motion.div
-              className="glass-card p-6 hover:border-amber-400/30 transition-all duration-300 group cursor-pointer"
+              className="transition-all duration-300 group cursor-pointer"
+              style={{
+                background: "#1a1a1a",
+                border: "1px solid rgba(255,255,255,0.06)",
+                borderRadius: 12,
+                padding: 24,
+              }}
+              whileHover={{ borderColor: "rgba(245,166,35,0.25)" }}
               variants={cardVariants}
             >
             <div
@@ -123,7 +130,11 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="bg-white/5 text-xs px-2 py-0.5 rounded text-gray-500"
+                    className="text-xs px-2 py-0.5 rounded"
+                    style={{
+                      background: "rgba(255,255,255,0.04)",
+                      color: "#9ca3af",
+                    }}
                   >
                     {tag}
                   </span>
@@ -138,7 +149,7 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
       {!defaultShowAll && (
         <button
           onClick={() => setShowAll(!showAll)}
-          className="mt-8 text-amber-400 hover:text-amber-300 text-sm font-mono transition-colors flex items-center gap-2 mx-auto"
+          className="mt-8 text-[#f5a623] hover:text-[#f7b84b] text-sm font-mono transition-colors flex items-center gap-2 mx-auto"
         >
           {showAll ? "← Show Less" : "View All Posts →"}
         </button>

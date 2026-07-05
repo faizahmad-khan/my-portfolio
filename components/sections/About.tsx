@@ -125,7 +125,7 @@ export default function About() {
         </div>
         <div style={{ overflowX: "auto" }}>
           <Image
-            src="https://ghchart.rshah.org/00d4ff/faizahmad-khan"
+            src="https://ghchart.rshah.org/f5a623/faizahmad-khan"
             alt="GitHub Contributions"
             width={800}
             height={200}

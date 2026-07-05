@@ -28,7 +28,7 @@ export default function Footer() {
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid rgba(255,255,255,0.08)",
                 color: "#6b7280",
                 fontSize: 11,
                 padding: "6px 14px",
@@ -47,7 +47,7 @@ export default function Footer() {
                 display: "flex",
                 alignItems: "center",
                 gap: 6,
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid rgba(255,255,255,0.08)",
                 color: "#6b7280",
                 fontSize: 11,
                 padding: "6px 14px",
@@ -83,8 +83,8 @@ export default function Footer() {
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "#1a1a1a",
+              border: "1px solid rgba(255,255,255,0.08)",
               borderRadius: 20,
               padding: 32,
               maxWidth: 900,
@@ -185,8 +185,8 @@ export default function Footer() {
           <div
             onClick={(e) => e.stopPropagation()}
             style={{
-              background: "rgba(255,255,255,0.04)",
-              border: "1px solid rgba(255,255,255,0.1)",
+              background: "#1a1a1a",
+              border: "1px solid rgba(255,255,255,0.08)",
               borderRadius: 20,
               padding: 32,
               maxWidth: 480,
@@ -237,7 +237,7 @@ export default function Footer() {
               {
                 label: "Projects",
                 value: projects.length.toString(),
-                color: "#f5a623",
+                color: "#9ca3af",
               },
               {
                 label: "Stack",
