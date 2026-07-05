@@ -48,7 +48,7 @@ export default function GameTeaser({ title, description, embedUrl, thumbnailColo
               justifyContent: "center",
             }}
           >
-            <Play size={22} color="#050505" fill="#050505" />
+            <Play size={22} color="#111111" fill="#111111" />
           </motion.div>
         </div>
       ) : (

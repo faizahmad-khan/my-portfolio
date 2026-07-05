@@ -17,7 +17,7 @@ export default function Experience() {
       {/* Timeline */}
       <div className="relative ml-4 mt-12 max-w-4xl mx-auto px-4">
         {/* Timeline Line */}
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-amber-400/20" />
+        <div className="absolute left-0 top-0 bottom-0 w-px" style={{ background: "rgba(245,166,35,0.2)" }} />
 
         {/* Timeline Items */}
         {experiences.map((exp, idx) => (
@@ -30,7 +30,13 @@ export default function Experience() {
             transition={{ duration: 0.6, delay: idx * 0.1 }}
           >
             {/* Timeline Dot */}
-            <div className="absolute left-0 top-1 w-3 h-3 rounded-full bg-amber-400 -translate-x-1/2 shadow-lg shadow-amber-400/50" />
+            <div
+              className="absolute left-0 top-1 w-3 h-3 rounded-full -translate-x-1/2"
+              style={{
+                background: "#f5a623",
+                boxShadow: "0 0 8px rgba(245,166,35,0.5)",
+              }}
+            />
 
             {/* Period Tag */}
             <p className="text-xs font-mono text-amber-400 mb-2">{exp.period}</p>
@@ -38,7 +44,7 @@ export default function Experience() {
             {/* Card */}
             <div className="glass-card p-6 overflow-hidden" style={{ wordBreak: "break-word" }}>
               {/* Type Badge */}
-              <p className="text-xs font-mono text-amber-400/60 tracking-widest uppercase mb-2">
+              <p className="text-xs font-mono tracking-widest uppercase mb-2" style={{ color: "rgba(245,166,35,0.7)" }}>
                 {exp.type === "education" ? "Education" : "Work"}
               </p>
 
@@ -59,7 +65,12 @@ export default function Experience() {
                   {exp.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="bg-white/10 text-amber-300 text-xs px-2 py-0.5 rounded-full font-mono"
+                      className="text-xs px-2 py-0.5 rounded-full font-mono"
+                      style={{
+                        background: "rgba(245,166,35,0.08)",
+                        color: "#f5a623",
+                        border: "1px solid rgba(245,166,35,0.15)",
+                      }}
                     >
                       {tech}
                     </span>

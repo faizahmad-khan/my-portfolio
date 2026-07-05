@@ -38,7 +38,14 @@ export default function Projects() {
           <motion.div
             key={project.id}
             className="relative"
-            style={{ height: "auto", minHeight: 300, perspective: 1000 }}
+            style={{
+              height: "auto",
+              minHeight: 300,
+              perspective: 1000,
+              border: "1px solid rgba(255,255,255,0.06)",
+              borderRadius: 16,
+            }}
+            whileHover={{ borderColor: "rgba(245,166,35,0.3)" }}
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -66,8 +73,8 @@ export default function Projects() {
                   WebkitBackfaceVisibility: "hidden",
                   borderRadius: 16,
                   overflow: "hidden",
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "#1a1a1a",
+                  border: "1px solid rgba(255,255,255,0.06)",
                 }}
               >
                 {/* Project image — low opacity background */}
@@ -126,12 +133,13 @@ export default function Projects() {
                     }}>
                       {project.techStack.slice(0, 3).map((tech) => (
                         <span key={tech} style={{
-                          background: "rgba(255,255,255,0.08)",
-                          color: "#fbbf24",
+                          background: "rgba(245,166,35,0.08)",
+                          color: "#f5a623",
                           fontSize: 10,
                           padding: "2px 8px",
                           borderRadius: 9999,
                           fontFamily: "monospace",
+                          border: "1px solid rgba(245,166,35,0.15)",
                         }}>
                           {tech}
                         </span>
@@ -160,7 +168,7 @@ export default function Projects() {
                   transform: "rotateY(180deg)",
                   borderRadius: 16,
                   overflow: "hidden",
-                  background: "rgba(245,166,35,0.04)",
+                  background: "#1e1a12",
                   border: "1px solid rgba(245,166,35,0.2)",
                   padding: 24,
                   display: "flex",
@@ -196,7 +204,7 @@ export default function Projects() {
                     {project.techStack.map((tech) => (
                       <span key={tech} style={{
                         background: "rgba(245,166,35,0.08)",
-                        color: "#fbbf24",
+                        color: "#f5a623",
                         fontSize: 10,
                         padding: "3px 10px",
                         borderRadius: 9999,
@@ -297,7 +305,7 @@ export default function Projects() {
       <div className="mt-12 text-center">
         <button
           onClick={() => setShowAll(!showAll)}
-          className="text-amber-400 hover:text-amber-300 text-sm font-mono 
+          className="text-[#f5a623] hover:text-[#f7b84b] text-sm font-mono 
             transition-colors flex items-center gap-2 mx-auto"
         >
           {showAll ? "← Show Less" : "View All Projects →"}

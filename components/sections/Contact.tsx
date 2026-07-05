@@ -115,9 +115,20 @@ export default function Contact() {
             <motion.a
               key={social.name}
               href={social.url}
-              className="glass-card p-6 hover:border-amber-400/30 hover:glow-border transition-all cursor-pointer"
-              style={{ minWidth: 0 }}
+              className="p-6 transition-all cursor-pointer"
+              style={{
+                minWidth: 0,
+                background: "#1a1a1a",
+                border: "1px solid rgba(255,255,255,0.06)",
+                borderRadius: 12,
+              }}
               whileHover={{ scale: 1.02 }}
+              onHoverStart={(event) => {
+                (event.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(245,166,35,0.25)";
+              }}
+              onHoverEnd={(event) => {
+                (event.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.06)";
+              }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
@@ -132,7 +143,12 @@ export default function Contact() {
 
       {/* Contact Form */}
       <motion.div
-        className="glass-card p-8 max-w-2xl w-full mx-4 md:mx-auto"
+        className="p-8 max-w-2xl w-full mx-4 md:mx-auto"
+        style={{
+          background: "#1a1a1a",
+          border: "1px solid rgba(255,255,255,0.06)",
+          borderRadius: 12,
+        }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -217,7 +233,7 @@ export default function Contact() {
                   ? "white"
                   : status === "error"
                   ? "#ef4444"
-                  : "#050505",
+                  : "#111111",
               fontWeight: 700,
               fontSize: 14,
               border: status === "error" ? "1px solid #ef4444" : "none",

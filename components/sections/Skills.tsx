@@ -244,7 +244,7 @@ export default function Skills() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
           <p className="text-xs font-mono text-amber-400 tracking-widest uppercase mb-3">
-            FORGE
+            SKILLS
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Technical Expertise</h2>
           <p className="text-gray-500 text-sm mt-3 font-mono">
@@ -292,8 +292,8 @@ export default function Skills() {
                   gap: 8,
                   padding: "14px 8px",
                   borderRadius: 14,
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  background: "#1a1a1a",
+                  border: "1px solid rgba(255,255,255,0.06)",
                   cursor: "pointer",
                   minHeight: 80,
                   position: "relative",
@@ -312,9 +312,9 @@ export default function Skills() {
                   const el = event.target as HTMLElement;
                   const card = el.closest("[data-skill-card]") as HTMLElement;
                   if (card) {
-                    card.style.border = "1px solid rgba(255,255,255,0.08)";
+                    card.style.border = "1px solid rgba(255,255,255,0.06)";
                     card.style.boxShadow = "none";
-                    card.style.background = "rgba(255,255,255,0.04)";
+                    card.style.background = "#1a1a1a";
                   }
                 }}
                 data-skill-card
@@ -491,8 +491,8 @@ export default function Skills() {
               <div
                 className="flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium text-white transition-colors select-none"
                 style={{
-                  background: "rgba(0,0,0,0.8)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "#1a1a1a",
+                  border: "1px solid rgba(255,255,255,0.08)",
                   whiteSpace: "nowrap",
                   cursor: "default",
                 }}
@@ -500,7 +500,7 @@ export default function Skills() {
                   event.currentTarget.style.borderColor = `${skill.color}99`;
                 }}
                 onMouseLeave={(event) => {
-                  event.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                  event.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
                 }}
               >
                 <skill.Icon size={16} color={skill.color} />
