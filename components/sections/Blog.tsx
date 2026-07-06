@@ -49,14 +49,14 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
   }, [showAll, defaultShowAll]);
 
   return (
-    <section ref={sectionRef} id="blog" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
+    <section ref={sectionRef} id="blog" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden" style={{ backgroundColor: "#111111" }}>
       {/* Eyebrow */}
-      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
+      <p className="section-eyebrow">
         WRITING & THOUGHTS
       </p>
 
       {/* Title */}
-      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">Blog</h2>
+      <h2 className="section-title">Blog</h2>
 
       {/* Grid */}
       <motion.div
@@ -77,10 +77,17 @@ export default function Blog({ defaultShowAll = false }: BlogProps) {
               style={{
                 background: "#1a1a1a",
                 border: "1px solid rgba(255,255,255,0.06)",
+                borderLeft: post.featured
+                  ? "3px solid #f5a623"
+                  : "3px solid rgba(245,166,35,0.4)",
                 borderRadius: 12,
                 padding: 24,
+                transition: "border-color 0.2s ease, border-left-color 0.2s ease",
               }}
-              whileHover={{ borderColor: "rgba(245,166,35,0.25)" }}
+              whileHover={{
+                borderColor: "rgba(245,166,35,0.25)",
+                borderLeftColor: post.featured ? "#f5a623" : "rgba(245,166,35,0.9)",
+              }}
               variants={cardVariants}
             >
             <div

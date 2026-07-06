@@ -236,6 +236,7 @@ export default function Skills() {
     <motion.section
       id="skills"
       className="py-16 md:py-24 px-4 overflow-hidden relative"
+      style={{ backgroundColor: "#0e0e0e" }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
@@ -243,10 +244,10 @@ export default function Skills() {
     >
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8">
-          <p className="text-xs font-mono text-amber-400 tracking-widest uppercase mb-3">
+          <p className="section-eyebrow mb-3 justify-center">
             SKILLS
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Technical Expertise</h2>
+          <h2 className="section-title">Technical Expertise</h2>
           <p className="text-gray-500 text-sm mt-3 font-mono">
             {skillsWithIcons.length} technologies & counting
           </p>

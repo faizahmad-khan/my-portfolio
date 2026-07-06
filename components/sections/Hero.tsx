@@ -24,7 +24,7 @@ export default function Hero() {
       />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-screen py-32">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-24 md:py-32 lg:min-h-screen">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -262,7 +262,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
-            className="hidden lg:flex justify-center items-center"
+            className="flex justify-center items-center lg:justify-center"
           >
             <div style={{ position: "relative" }}>
               <div
@@ -278,8 +278,8 @@ export default function Hero() {
               <div
                 style={{
                   position: "relative",
-                  width: 380,
-                  height: 380,
+                  width: "min(320px, 80vw)",
+                  height: "min(320px, 80vw)",
                   borderRadius: "50%",
                   overflow: "hidden",
                   border: "3px solid rgba(245,166,35,0.3)",
@@ -295,33 +295,6 @@ export default function Hero() {
                   sizes="380px"
                 />
               </div>
-
-              <div
-                style={{
-                  position: "absolute",
-                  top: 20,
-                  right: -12,
-                  width: 20,
-                  height: 20,
-                  borderRadius: "50%",
-                  background: "#f5a623",
-                  boxShadow: "0 0 20px rgba(245,166,35,0.6)",
-                  zIndex: 2,
-                }}
-              />
-
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: -20,
-                  left: -20,
-                  width: 80,
-                  height: 80,
-                  borderRadius: "50%",
-                  border: "1px solid rgba(245,166,35,0.15)",
-                  zIndex: 0,
-                }}
-              />
 
               <motion.div
                 animate={{ y: [-4, 4, -4] }}

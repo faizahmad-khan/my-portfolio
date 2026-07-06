@@ -12,14 +12,14 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
+    <section id="about" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden" style={{ backgroundColor: "#111111" }}>
       {/* Eyebrow */}
-      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
+      <p className="section-eyebrow">
         WHO I AM
       </p>
 
       {/* Title */}
-      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">About Me</h2>
+      <h2 className="section-title">About Me</h2>
 
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-12">
@@ -101,6 +101,7 @@ export default function About() {
             style={{ minWidth: 0 }}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
             transition={{ delay: idx * 0.1 }}
           >
             <p className="text-2xl md:text-3xl font-bold text-amber-400">{stat.number}</p>
