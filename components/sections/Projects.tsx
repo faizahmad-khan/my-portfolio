@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Code, X, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { projects } from "@/data/projects";
-import GameTeaser from "@/components/ui/GameTeaser";
 
 export default function Projects() {
   const [showAll, setShowAll] = useState(false);
@@ -13,12 +12,12 @@ export default function Projects() {
   const displayed = showAll ? projects : projects.slice(0, 3);
 
   return (
-    <section id="projects" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden">
+    <section id="projects" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden" style={{ backgroundColor: "#111111" }}>
       {/* Header */}
-      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
+      <p className="section-eyebrow">
         FEATURED WORK
       </p>
-      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2 mb-12">Projects</h2>
+      <h2 className="section-title mb-12">Projects</h2>
 
       {/* Grid */}
       <motion.div
@@ -265,41 +264,6 @@ export default function Projects() {
           </motion.div>
         ))}
       </motion.div>
-
-      <div style={{ marginTop: 48 }}>
-        <p
-          style={{
-            fontSize: 12,
-            fontFamily: "monospace",
-            color: "#f5a623",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            marginBottom: 16,
-          }}
-        >
-          Play Instantly
-        </p>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: 20,
-          }}
-        >
-          <GameTeaser
-            title="Castle Defenders"
-            description="A tower defense game with A* pathfinding enemies, dynamic targeting towers, and wave-based progression. The most complex game in the collection."
-            embedUrl="https://castle-defenders.onrender.com"
-            thumbnailColor="#22c55e"
-          />
-          <GameTeaser
-            title="Space Invaders"
-            description="A retro arcade shooter rebuilt from scratch with HTML5 Canvas — progressive difficulty, mystery ships, and destructible barriers."
-            embedUrl="https://space-invaders-e95g.onrender.com"
-            thumbnailColor="#a855f7"
-          />
-        </div>
-      </div>
 
       {/* Show more/less */}
       <div className="mt-12 text-center">

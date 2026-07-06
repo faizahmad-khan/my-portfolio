@@ -73,7 +73,7 @@ export default function StarfieldBackground() {
         const twinkleFactor = Math.sin(star.twinklePhase);
         const opacity = star.opacity + twinkleFactor * 0.4;
 
-        ctx.fillStyle = `rgba(0, 212, 255, ${Math.max(0, opacity)})`;
+        ctx.fillStyle = `rgba(245, 166, 35, ${Math.max(0, opacity)})`;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fill();

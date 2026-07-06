@@ -20,7 +20,7 @@ export const skills = [
   { name: "Netlify", color: "#00C7B7", category: "devops" },
   { name: "Render", color: "#46E3B7", category: "devops" },
   { name: "Streamlit", color: "#FF0000", category: "ml" },
-  { name: "LangChain", color: "#00d4ff", category: "ml" },
+  { name: "LangChain", color: "#22c55e", category: "ml" },
   { name: "TensorFlow", color: "#FF6F00", category: "ml" },
   { name: "OpenCV", color: "#5C3EE8", category: "ml" },
   { name: "MediaPipe", color: "#0097A7", category: "ml" },

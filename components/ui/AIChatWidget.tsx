@@ -134,7 +134,7 @@ export default function AIChatWidget() {
                     background: msg.role === "user"
                       ? "#f5a623"
                       : "rgba(255,255,255,0.06)",
-                    color: msg.role === "user" ? "#050505" : "#e5e7eb",
+                    color: msg.role === "user" ? "#111111" : "#e5e7eb",
                     padding: "10px 14px",
                     borderRadius: 14,
                     fontSize: 13,
@@ -183,7 +183,7 @@ export default function AIChatWidget() {
                         borderRadius: 10,
                         border: "1px solid rgba(245,166,35,0.2)",
                         background: "rgba(245,166,35,0.05)",
-                        color: "#fbbf24",
+                        color: "#f5a623",
                         fontSize: 12,
                         cursor: "pointer",
                       }}

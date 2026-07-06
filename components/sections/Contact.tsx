@@ -87,14 +87,14 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-16 px-4 md:py-24 max-w-5xl mx-auto overflow-x-hidden">
+    <section id="contact" className="py-16 px-4 md:py-24 max-w-5xl mx-auto overflow-x-hidden" style={{ backgroundColor: "#0e0e0e" }}>
       {/* Eyebrow */}
-      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
+      <p className="section-eyebrow">
         GET IN TOUCH
       </p>
 
       {/* Title */}
-      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">Contact</h2>
+      <h2 className="section-title">Contact</h2>
 
       {/* Find me on section */}
       <h3 className="text-xl font-semibold text-gray-300 mt-12 mb-6">
@@ -131,6 +131,7 @@ export default function Contact() {
               }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: idx * 0.1 }}
             >
               <Icon size={20} style={{ color: social.color }} className="mb-3 md:size-8" />

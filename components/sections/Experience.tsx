@@ -5,14 +5,14 @@ import { experiences } from "@/data/experience";
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-16 px-4 max-w-4xl mx-auto overflow-x-hidden">
+    <section id="experience" className="py-16 px-4 max-w-4xl mx-auto overflow-x-hidden" style={{ backgroundColor: "#0e0e0e" }}>
       {/* Eyebrow */}
-      <p className="text-xs font-mono text-amber-400 tracking-widest uppercase">
+      <p className="section-eyebrow">
         EDUCATION & WORK
       </p>
 
       {/* Title */}
-      <h2 className="text-3xl md:text-5xl font-bold text-white mt-2">Experience</h2>
+      <h2 className="section-title">Experience</h2>
 
       {/* Timeline */}
       <div className="relative ml-4 mt-12 max-w-4xl mx-auto px-4">
