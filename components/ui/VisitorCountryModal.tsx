@@ -79,13 +79,15 @@ export default function VisitorCountryModal({ open, onClose, summary }: VisitorC
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 14 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="relative z-10 w-full max-w-[720px] overflow-hidden rounded-[22px] border border-white/10 bg-[#0a0a0a]/95 shadow-2xl shadow-black/45 backdrop-blur-xl sm:max-w-[760px]"
-            style={{ maxHeight: 'calc(100vh - 0.75rem)' }}
+            className="relative z-10 w-full max-w-[720px] overflow-hidden rounded-[22px] shadow-2xl shadow-black/45 backdrop-blur-xl sm:max-w-[760px]"
+            style={{ background: "rgba(17,17,17,0.98)", borderColor: "rgba(255,255,255,0.08)", maxHeight: "calc(100vh - 0.75rem)" }}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-start justify-between gap-3 border-b border-white/8 px-3 py-2.5 sm:px-4 sm:py-3">
+            <div className="flex items-start justify-between gap-3 border-b px-3 py-2.5 sm:px-4 sm:py-3"
+              style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               <div>
-                <div className="text-[10px] uppercase tracking-[0.3em] text-[#f5a623]/75">
+                <div className="text-[10px] uppercase tracking-[0.3em]"
+                  style={{ color: "rgba(245,166,35,0.8)" }}>
                   Visitor geography
                 </div>
                 <h2 id="visitor-geography-title" className="mt-1 text-[24px] font-semibold text-white sm:text-[28px]">
@@ -96,7 +98,7 @@ export default function VisitorCountryModal({ open, onClose, summary }: VisitorC
               <button
                 type="button"
                 onClick={onClose}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-gray-300 transition-colors hover:border-white/20 hover:text-white"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-[#222222] text-gray-300 transition-colors hover:border-white/20 hover:text-white"
                 aria-label="Close modal"
               >
                 <X size={16} />
@@ -104,7 +106,7 @@ export default function VisitorCountryModal({ open, onClose, summary }: VisitorC
             </div>
 
             <div className="grid gap-2.5 overflow-y-auto p-2.5 sm:p-3.5 lg:grid-cols-[0.88fr_1.12fr]">
-              <section className="min-w-0 rounded-[20px] border border-white/8 bg-white/4 p-2.5 sm:p-3">
+              <section className="min-w-0 rounded-[20px] border border-white/8 bg-[#1a1a1a] p-2.5 sm:p-3">
                 <div className="flex items-end justify-between gap-2">
                   <div>
                     <div className="text-[10px] uppercase tracking-[0.28em] text-slate-500">
@@ -116,12 +118,14 @@ export default function VisitorCountryModal({ open, onClose, summary }: VisitorC
                   </div>
                 </div>
 
-                <div className="mt-2.5 rounded-[18px] border border-white/8 bg-[#08111d] p-2 sm:p-2.5">
+                <div className="mt-2.5 rounded-[18px] border border-white/8 p-2 sm:p-2.5"
+                  style={{ background: "#141414" }}>
                   <div className="flex items-center justify-between gap-2 text-[10px] uppercase tracking-[0.28em] text-slate-500">
                     <span>World map</span>
                   </div>
 
-                  <div className="mt-2 overflow-hidden rounded-[16px] border border-white/6 bg-[#09101a]">
+                  <div className="mt-2 overflow-hidden rounded-[16px] border border-white/6"
+                    style={{ background: "#111111" }}>
                     <img
                       src="/assets/world-map-adobe.jpg"
                       alt="World map"
@@ -133,7 +137,7 @@ export default function VisitorCountryModal({ open, onClose, summary }: VisitorC
                 </div>
               </section>
 
-              <section className="min-w-0 rounded-[20px] border border-white/8 bg-white/4 p-2.5 sm:p-3">
+              <section className="min-w-0 rounded-[20px] border border-white/8 bg-[#1a1a1a] p-2.5 sm:p-3">
                 <div className="flex items-center justify-between gap-3 pb-2">
                   <div>
                     <div className="text-[10px] uppercase tracking-[0.28em] text-slate-500">
@@ -145,7 +149,7 @@ export default function VisitorCountryModal({ open, onClose, summary }: VisitorC
 
                 <div className="space-y-2">
                   {countries.length === 0 ? (
-                    <div className="rounded-[16px] border border-white/8 bg-white/5 px-4 py-4 text-sm text-slate-400">
+                    <div className="rounded-[16px] border border-white/8 bg-[#222222] px-4 py-4 text-sm text-slate-400">
                       Loading visitor geography...
                     </div>
                   ) : (
@@ -155,7 +159,7 @@ export default function VisitorCountryModal({ open, onClose, summary }: VisitorC
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.22, delay: index * 0.04 }}
-                        className="rounded-[16px] border border-white/8 bg-white/5 px-3 py-2 sm:px-3.5"
+                        className="rounded-[16px] border border-white/8 bg-[#222222] px-3 py-2 sm:px-3.5"
                       >
                         <div className="flex items-center gap-2.5">
                           <div className="relative flex h-5.5 w-9 shrink-0 items-center justify-center overflow-hidden rounded-md border border-white/10 bg-white/8 text-[12px] leading-none">
