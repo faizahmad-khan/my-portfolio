@@ -74,7 +74,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      style={{ backgroundColor: "#0e0e0e" }}
+      style={{ backgroundColor: "#131311" }}
       className="py-24 px-4"
     >
       <div className="max-w-7xl mx-auto">
@@ -85,7 +85,7 @@ export default function Skills() {
           <h2 className="section-title">Technical Expertise</h2>
           <p style={{
             fontSize: 13,
-            color: "#6b7280",
+            color: "#6b6b65",
             fontFamily: "monospace",
             marginTop: 8,
           }}>
@@ -122,8 +122,8 @@ export default function Skills() {
                 gap: 10,
                 padding: "20px 12px",
                 borderRadius: 16,
-                background: "#1a1a1a",
-                border: "1px solid rgba(255,255,255,0.06)",
+                background: "#1e1e1c",
+                border: "1px solid rgba(245,245,240,0.07)",
                 cursor: "default",
                 position: "relative",
                 overflow: "hidden",
@@ -136,14 +136,14 @@ export default function Skills() {
                 el.style.border = `1px solid ${skill.color}50`;
                 el.style.boxShadow = `0 0 20px ${skill.color}25, 
                   0 8px 24px rgba(0,0,0,0.4)`;
-                el.style.background = "#1f1f1f";
+                el.style.background = "#252523";
               }}
               onHoverEnd={(e) => {
                 const el = (e.target as HTMLElement).closest(
                   "[data-skill]"
                 ) as HTMLElement;
                 if (!el) return;
-                el.style.border = "1px solid rgba(255,255,255,0.06)";
+                el.style.border = "1px solid rgba(245,245,240,0.07)";
                 el.style.boxShadow = "none";
                 el.style.background = "#1a1a1a";
               }}
@@ -176,7 +176,7 @@ export default function Skills() {
               <span
                 style={{
                   fontSize: 10,
-                  color: "#9ca3af",
+                  color: "#6b6b65",
                   fontFamily: "monospace",
                   textAlign: "center",
                   lineHeight: 1.3,
