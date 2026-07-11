@@ -64,7 +64,7 @@ export default function StarfieldBackground() {
 
     const animate = () => {
       // Clear canvas
-      ctx.fillStyle = "#050505";
+      ctx.fillStyle = "#161614";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // Update and draw stars
@@ -73,7 +73,7 @@ export default function StarfieldBackground() {
         const twinkleFactor = Math.sin(star.twinklePhase);
         const opacity = star.opacity + twinkleFactor * 0.4;
 
-        ctx.fillStyle = `rgba(245, 166, 35, ${Math.max(0, opacity)})`;
+        ctx.fillStyle = `rgba(245, 245, 240, ${Math.max(0, opacity)})`;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -155,7 +155,7 @@ export default function StarfieldBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 z-0 pointer-events-none"
-      style={{ background: "#050505" }}
+      style={{ background: "#161614" }}
     />
   );
 }

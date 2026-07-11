@@ -94,10 +94,10 @@ export default function VisitorBadge() {
           whileHover={{ y: -2, scale: 1.01 }}
           whileTap={{ scale: 0.98 }}
           transition={{ duration: 0.22, ease: 'easeOut' }}
-          className="relative inline-flex items-center gap-2 rounded-full border border-amber-400/25 bg-black/70 px-3 py-2 text-xs text-gray-200 shadow-[0_0_30px_rgba(245,166,35,0.12)] backdrop-blur-md transition-colors duration-300 hover:border-amber-400/50 cursor-pointer select-none"
+          className="relative inline-flex items-center gap-2 rounded-full border border-[rgba(245,245,240,0.2)] bg-black/70 px-3 py-2 text-xs text-gray-200 shadow-[0_0_30px_rgba(245,245,240,0.1)] backdrop-blur-md transition-colors duration-300 hover:border-[rgba(245,245,240,0.4)] cursor-pointer select-none"
           aria-label="Open visitor geography"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-400/10 text-amber-400">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[rgba(245,245,240,0.1)] text-[#f5f5f0]">
             <Users size={14} />
           </span>
 
@@ -115,7 +115,7 @@ export default function VisitorBadge() {
             initial={false}
             animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 6 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="pointer-events-none absolute bottom-full left-0 mb-2 w-max max-w-[220px] rounded-xl border border-amber-400/20 bg-[#101010] px-3 py-2 text-[11px] text-gray-300 shadow-xl"
+            className="pointer-events-none absolute bottom-full left-0 mb-2 w-max max-w-[220px] rounded-xl border border-[rgba(245,245,240,0.15)] bg-[#101010] px-3 py-2 text-[11px] text-gray-300 shadow-xl"
           >
             <div className="uppercase tracking-[0.18em] text-[10px] text-gray-500">Total visitors</div>
             <div className="mt-1 font-mono text-sm text-white">

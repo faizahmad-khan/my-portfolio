@@ -87,7 +87,7 @@ export default function VisitorCountryModal({ open, onClose, summary }: VisitorC
               style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               <div>
                 <div className="text-[10px] uppercase tracking-[0.3em]"
-                  style={{ color: "rgba(245,166,35,0.8)" }}>
+                  style={{ color: "rgba(245,245,240,0.6)" }}>
                   Visitor geography
                 </div>
                 <h2 id="visitor-geography-title" className="mt-1 text-[24px] font-semibold text-white sm:text-[28px]">
