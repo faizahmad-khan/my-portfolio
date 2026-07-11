@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       className="relative min-h-screen flex items-center"
-      style={{ backgroundColor: "#111111" }}
+      style={{ backgroundColor: "#161614" }}
     >
       <div
         style={{
@@ -18,7 +18,7 @@ export default function Hero() {
           width: "50%",
           height: "50%",
           background:
-            "radial-gradient(ellipse at top left, rgba(245,166,35,0.06) 0%, transparent 60%)",
+            "radial-gradient(ellipse at top left, rgba(245,245,240,0.06) 0%, transparent 60%)",
           pointerEvents: "none",
         }}
       />
@@ -36,7 +36,7 @@ export default function Hero() {
                 style={{
                   width: 32,
                   height: 1,
-                  background: "#f5a623",
+                  background: "rgba(245,245,240,0.3)",
                 }}
               />
               <span
@@ -45,7 +45,7 @@ export default function Hero() {
                   fontFamily: "monospace",
                   letterSpacing: "0.3em",
                   textTransform: "uppercase",
-                  color: "#f5a623",
+                  color: "#6b6b65",
                 }}
               >
                 Hello, I&apos;m
@@ -65,7 +65,7 @@ export default function Hero() {
               >
                 Faiz Ahmad
                 <br />
-                <span style={{ color: "#f5a623" }}>Khan</span>
+                <span style={{ color: "#f5f5f0" }}>Khan</span>
               </h1>
             </div>
 
@@ -76,8 +76,8 @@ export default function Hero() {
                 gap: 8,
                 padding: "6px 14px",
                 borderRadius: 6,
-                background: "rgba(245,166,35,0.08)",
-                border: "1px solid rgba(245,166,35,0.2)",
+                background: "rgba(245,245,240,0.05)",
+                border: "1px solid rgba(245,245,240,0.12)",
                 width: "fit-content",
               }}
             >
@@ -86,8 +86,8 @@ export default function Hero() {
                   width: 6,
                   height: 6,
                   borderRadius: "50%",
-                  background: "#f5a623",
-                  boxShadow: "0 0 8px #f5a623",
+                  background: "#f5f5f0",
+                  boxShadow: "0 0 6px rgba(245,245,240,0.4)",
                   display: "inline-block",
                   flexShrink: 0,
                 }}
@@ -96,7 +96,7 @@ export default function Hero() {
                 style={{
                   fontSize: 12,
                   fontFamily: "monospace",
-                  color: "#f5a623",
+                  color: "#9a9a94",
                   letterSpacing: "0.1em",
                 }}
               >
@@ -137,11 +137,11 @@ export default function Hero() {
                 { number: "10+", label: "Technologies" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div
+                    <div
                     style={{
                       fontSize: 24,
                       fontWeight: 800,
-                      color: "#f5a623",
+                      color: "#f5f5f0",
                       lineHeight: 1,
                     }}
                   >
@@ -150,7 +150,7 @@ export default function Hero() {
                   <div
                     style={{
                       fontSize: 11,
-                      color: "#6b7280",
+                      color: "#6b6b65",
                       fontFamily: "monospace",
                       marginTop: 4,
                       letterSpacing: "0.05em",
@@ -165,7 +165,7 @@ export default function Hero() {
             <div
               style={{
                 height: 1,
-                background: "rgba(255,255,255,0.06)",
+                background: "rgba(245,245,240,0.07)",
                 width: "100%",
               }}
             />
@@ -180,8 +180,8 @@ export default function Hero() {
                   gap: 8,
                   padding: "12px 24px",
                   borderRadius: 8,
-                  background: "#f5a623",
-                  color: "#111111",
+                  background: "#f5f5f0",
+                  color: "#161614",
                   fontWeight: 700,
                   fontSize: 14,
                   textDecoration: "none",
@@ -205,10 +205,10 @@ export default function Hero() {
                   padding: "12px 24px",
                   borderRadius: 8,
                   background: "transparent",
-                  color: "#9ca3af",
+                  color: "#9a9a94",
                   fontWeight: 500,
                   fontSize: 14,
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border: "1px solid rgba(245,245,240,0.12)",
                   cursor: "pointer",
                 }}
               >
@@ -228,7 +228,7 @@ export default function Hero() {
                   gap: 6,
                   fontSize: 12,
                   fontFamily: "monospace",
-                  color: "#6b7280",
+                  color: "#6b6b65",
                   textDecoration: "none",
                   letterSpacing: "0.05em",
                 }}
@@ -247,7 +247,7 @@ export default function Hero() {
                   gap: 6,
                   fontSize: 12,
                   fontFamily: "monospace",
-                  color: "#6b7280",
+                  color: "#6b6b65",
                   textDecoration: "none",
                   letterSpacing: "0.05em",
                 }}
@@ -270,7 +270,7 @@ export default function Hero() {
                   position: "absolute",
                   inset: -3,
                   borderRadius: "50%",
-                  background: "linear-gradient(135deg, #f5a623 0%, transparent 60%)",
+                  background: "linear-gradient(135deg, rgba(245,245,240,0.2) 0%, transparent 60%)",
                   zIndex: 0,
                 }}
               />
@@ -282,7 +282,7 @@ export default function Hero() {
                   height: "min(320px, 80vw)",
                   borderRadius: "50%",
                   overflow: "hidden",
-                  border: "3px solid rgba(245,166,35,0.3)",
+                  border: "3px solid rgba(245,245,240,0.15)",
                   zIndex: 1,
                 }}
               >
@@ -303,8 +303,8 @@ export default function Hero() {
                   position: "absolute",
                   bottom: 20,
                   right: -30,
-                  background: "#1a1a1a",
-                  border: "1px solid rgba(245,166,35,0.2)",
+                  background: "#1e1e1c",
+                  border: "1px solid rgba(245,245,240,0.1)",
                   borderRadius: 12,
                   padding: "10px 14px",
                   display: "flex",
@@ -328,7 +328,7 @@ export default function Hero() {
                   style={{
                     fontSize: 11,
                     fontFamily: "monospace",
-                    color: "#e5e7eb",
+color: "#e5e5e0",
                     whiteSpace: "nowrap",
                   }}
                 >

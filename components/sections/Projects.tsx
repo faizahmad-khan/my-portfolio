@@ -12,7 +12,7 @@ export default function Projects() {
   const displayed = showAll ? projects : projects.slice(0, 3);
 
   return (
-    <section id="projects" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden" style={{ backgroundColor: "#111111" }}>
+    <section id="projects" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden" style={{ backgroundColor: "#161614" }}>
       {/* Header */}
       <p className="section-eyebrow">
         FEATURED WORK
@@ -41,10 +41,10 @@ export default function Projects() {
               height: "auto",
               minHeight: 300,
               perspective: 1000,
-              border: "1px solid rgba(255,255,255,0.06)",
+              border: "1px solid rgba(245,245,240,0.07)",
               borderRadius: 16,
             }}
-            whileHover={{ borderColor: "rgba(245,166,35,0.3)" }}
+            whileHover={{ borderColor: "rgba(245,245,240,0.2)" }}
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -72,8 +72,8 @@ export default function Projects() {
                   WebkitBackfaceVisibility: "hidden",
                   borderRadius: 16,
                   overflow: "hidden",
-                  background: "#1a1a1a",
-                  border: "1px solid rgba(255,255,255,0.06)",
+                  background: "#1e1e1c",
+                  border: "1px solid rgba(245,245,240,0.07)",
                 }}
               >
                 {/* Project image — low opacity background */}
@@ -132,13 +132,13 @@ export default function Projects() {
                     }}>
                       {project.techStack.slice(0, 3).map((tech) => (
                         <span key={tech} style={{
-                          background: "rgba(245,166,35,0.08)",
-                          color: "#f5a623",
+                          background: "rgba(245,245,240,0.06)",
+                          color: "#9a9a94",
                           fontSize: 10,
                           padding: "2px 8px",
                           borderRadius: 9999,
                           fontFamily: "monospace",
-                          border: "1px solid rgba(245,166,35,0.15)",
+                          border: "1px solid rgba(245,245,240,0.1)",
                         }}>
                           {tech}
                         </span>
@@ -147,7 +147,7 @@ export default function Projects() {
                     <p style={{
                       fontSize: 10,
                       fontFamily: "monospace",
-                      color: "rgba(255,255,255,0.6)",
+                      color: "rgba(245,245,240,0.6)",
                       letterSpacing: "0.15em",
                       textTransform: "uppercase",
                     }}>
@@ -167,8 +167,8 @@ export default function Projects() {
                   transform: "rotateY(180deg)",
                   borderRadius: 16,
                   overflow: "hidden",
-                  background: "#1e1a12",
-                  border: "1px solid rgba(245,166,35,0.2)",
+                  background: "#222220",
+                  border: "1px solid rgba(245,245,240,0.12)",
                   padding: 24,
                   display: "flex",
                   flexDirection: "column",
@@ -183,11 +183,11 @@ export default function Projects() {
                     </h3>
                     <div style={{
                       width: 28, height: 28, borderRadius: "50%",
-                      background: "rgba(245,166,35,0.1)",
+                      background: "rgba(245,245,240,0.1)",
                       display: "flex", alignItems: "center", justifyContent: "center",
                       flexShrink: 0,
                     }}>
-                      <X size={14} color="#f5a623" />
+                      <X size={14} color="#9a9a94" />
                     </div>
                   </div>
                   <p style={{
@@ -202,13 +202,13 @@ export default function Projects() {
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
                     {project.techStack.map((tech) => (
                       <span key={tech} style={{
-                        background: "rgba(245,166,35,0.08)",
-                        color: "#f5a623",
+                        background: "rgba(245,245,240,0.06)",
+                        color: "#9a9a94",
                         fontSize: 10,
                         padding: "3px 10px",
                         borderRadius: 9999,
                         fontFamily: "monospace",
-                        border: "1px solid rgba(245,166,35,0.15)",
+                        border: "1px solid rgba(245,245,240,0.1)",
                       }}>
                         {tech}
                       </span>
@@ -245,12 +245,12 @@ export default function Projects() {
                         onClick={(e) => e.stopPropagation()}
                         style={{
                           display: "flex", alignItems: "center", gap: 6,
-                          fontSize: 12, color: "#050505", fontFamily: "monospace",
+                          fontSize: 12, color: "#161614", fontFamily: "monospace",
                           fontWeight: 600,
                           textDecoration: "none",
                           padding: "6px 14px",
                           borderRadius: 9999,
-                          background: "#f5a623",
+                          background: "#f5f5f0",
                         }}
                       >
                         <ArrowUpRight size={13} />
@@ -269,7 +269,7 @@ export default function Projects() {
       <div className="mt-12 text-center">
         <button
           onClick={() => setShowAll(!showAll)}
-          className="text-[#f5a623] hover:text-[#f7b84b] text-sm font-mono 
+          className="text-[#9a9a94] hover:text-[#f5f5f0] text-sm font-mono 
             transition-colors flex items-center gap-2 mx-auto"
         >
           {showAll ? "← Show Less" : "View All Projects →"}
