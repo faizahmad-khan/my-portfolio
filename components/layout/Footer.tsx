@@ -211,7 +211,7 @@ export default function Footer() {
                   gap: 8,
                 }}
               >
-                <Activity size={18} color="#f5a623" />
+                <Activity size={18} color="#f5f5f0" />
                 Site Monitor
               </h2>
               <button
@@ -232,7 +232,7 @@ export default function Footer() {
               {
                 label: "Total Visitors",
                 value: "See badge →",
-                color: "#f5a623",
+                color: "#f5f5f0",
               },
               {
                 label: "Projects",
@@ -287,8 +287,8 @@ export default function Footer() {
               style={{
                 marginTop: 20,
                 padding: "12px 16px",
-                background: "rgba(245,166,35,0.05)",
-                border: "1px solid rgba(245,166,35,0.15)",
+                background: "rgba(245,245,240,0.05)",
+                border: "1px solid rgba(245,245,240,0.12)",
                 borderRadius: 10,
                 display: "flex",
                 alignItems: "center",

@@ -39,7 +39,7 @@ export default async function BlogPostPage({
           <Link
             href="/blog"
             className="flex items-center gap-2 text-gray-500
-              hover:text-amber-400 text-sm font-mono mb-12
+              hover:text-[#f5f5f0] text-sm font-mono mb-12
               transition-colors w-fit"
           >
             <ArrowLeft size={14} />
@@ -70,9 +70,9 @@ export default async function BlogPostPage({
                   style={{
                     fontSize: 11,
                     fontFamily: "monospace",
-                    color: "#fbbf24",
-                    background: "rgba(245,166,35,0.08)",
-                    border: "1px solid rgba(245,166,35,0.15)",
+                    color: "#9a9a94",
+                    background: "rgba(245,245,240,0.06)",
+                    border: "1px solid rgba(245,245,240,0.1)",
                     borderRadius: 9999,
                     padding: "3px 10px",
                   }}
