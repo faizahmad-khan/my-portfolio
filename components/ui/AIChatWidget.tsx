@@ -62,16 +62,16 @@ export default function AIChatWidget() {
           width: 56,
           height: 56,
           borderRadius: "50%",
-          background: "#f5a623",
+          background: "#f5f5f0",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          boxShadow: "0 4px 20px rgba(245,166,35,0.4)",
+          boxShadow: "0 4px 20px rgba(245,245,240,0.3)",
           border: "none",
           cursor: "pointer",
         }}
       >
-        {isOpen ? <X size={22} color="#050505" /> : <MessageCircle size={22} color="#050505" />}
+        {isOpen ? <X size={22} color="#161614" /> : <MessageCircle size={22} color="#161614" />}
       </motion.button>
 
       <AnimatePresence>
@@ -107,7 +107,7 @@ export default function AIChatWidget() {
                 gap: 10,
               }}
             >
-              <Sparkles size={16} color="#f5a623" />
+              <Sparkles size={16} color="#9a9a94" />
               <div>
                 <p style={{ color: "white", fontSize: 13, fontWeight: 600 }}>Ask about Faiz</p>
                 <p style={{ color: "#6b7280", fontSize: 11 }}>Quick answers about his work</p>
@@ -132,9 +132,9 @@ export default function AIChatWidget() {
                     alignSelf: msg.role === "user" ? "flex-end" : "flex-start",
                     maxWidth: "85%",
                     background: msg.role === "user"
-                      ? "#f5a623"
+                      ? "#f5f5f0"
                       : "rgba(255,255,255,0.06)",
-                    color: msg.role === "user" ? "#111111" : "#e5e7eb",
+                    color: msg.role === "user" ? "#161614" : "#e5e7eb",
                     padding: "10px 14px",
                     borderRadius: 14,
                     fontSize: 13,
@@ -181,9 +181,9 @@ export default function AIChatWidget() {
                         textAlign: "left",
                         padding: "8px 12px",
                         borderRadius: 10,
-                        border: "1px solid rgba(245,166,35,0.2)",
-                        background: "rgba(245,166,35,0.05)",
-                        color: "#f5a623",
+                        border: "1px solid rgba(245,245,240,0.12)",
+                        background: "rgba(245,245,240,0.04)",
+                        color: "#9a9a94",
                         fontSize: 12,
                         cursor: "pointer",
                       }}
@@ -226,7 +226,7 @@ export default function AIChatWidget() {
                   width: 40,
                   height: 40,
                   borderRadius: 10,
-                  background: "#f5a623",
+                  background: "#f5f5f0",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -236,7 +236,7 @@ export default function AIChatWidget() {
                   opacity: typing ? 0.6 : 1,
                 }}
               >
-                <Send size={16} color="#050505" />
+                <Send size={16} color="#161614" />
               </button>
             </div>
           </motion.div>

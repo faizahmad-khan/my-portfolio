@@ -42,13 +42,13 @@ export default function GameTeaser({ title, description, embedUrl, thumbnailColo
               width: 56,
               height: 56,
               borderRadius: "50%",
-              background: "rgba(245,166,35,0.9)",
+              background: "rgba(245,245,240,0.92)",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <Play size={22} color="#111111" fill="#111111" />
+            <Play size={22} color="#161614" fill="#161614" />
           </motion.div>
         </div>
       ) : (
@@ -96,7 +96,7 @@ export default function GameTeaser({ title, description, embedUrl, thumbnailColo
             alignItems: "center",
             gap: 6,
             fontSize: 11,
-            color: "#fbbf24",
+            color: "#9a9a94",
             fontFamily: "monospace",
             textDecoration: "none",
           }}
