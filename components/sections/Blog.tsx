@@ -1,166 +1,226 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import type { BlogPost } from "@/lib/blog";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
-};
 
 type BlogProps = {
   defaultShowAll?: boolean;
 };
 
 export default function Blog({ defaultShowAll = false }: BlogProps) {
-  const [showAll, setShowAll] = useState(defaultShowAll);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [showAll, setShowAll] = useState(defaultShowAll);
   const sectionRef = useRef<HTMLElement | null>(null);
-  const displayed = showAll ? blogPosts : blogPosts.slice(0, 3);
 
   useEffect(() => {
     fetch("/api/posts")
-      .then((r) => r.json() as Promise<BlogPost[]>)
+      .then((r) => r.json())
       .then(setBlogPosts);
   }, []);
 
   useEffect(() => {
-    if (!showAll || defaultShowAll) {
-      return;
-    }
-
+    if (!showAll || defaultShowAll) return;
     sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [showAll, defaultShowAll]);
 
+  const displayed = showAll ? blogPosts : blogPosts.slice(0, 3);
+
   return (
-    <section ref={sectionRef} id="blog" className="py-16 px-4 max-w-7xl mx-auto overflow-x-hidden" style={{ backgroundColor: "#111111" }}>
-      {/* Eyebrow */}
-      <p className="section-eyebrow">
-        WRITING & THOUGHTS
-      </p>
+    <section
+      ref={sectionRef}
+      id="blog"
+      style={{ backgroundColor: "#161614" }}
+      className="py-24 px-4"
+    >
+      <div className="max-w-7xl mx-auto">
 
-      {/* Title */}
-      <h2 className="section-title">Blog</h2>
+        {/* Header */}
+        <div className="mb-16">
+          <p className="section-eyebrow">Writing & Thoughts</p>
+          <h2 className="section-title">Blog</h2>
+        </div>
 
-      {/* Grid */}
-      <motion.div
-        key={showAll ? "all" : "featured"}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {displayed.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            style={{ textDecoration: "none", display: "block" }}
-          >
-            <motion.div
-              className="transition-all duration-300 group cursor-pointer"
-              style={{
-                background: "#1a1a1a",
-                border: "1px solid rgba(255,255,255,0.06)",
-                borderLeft: post.featured
-                  ? "3px solid #f5a623"
-                  : "3px solid rgba(245,166,35,0.4)",
-                borderRadius: 12,
-                padding: 24,
-                transition: "border-color 0.2s ease, border-left-color 0.2s ease",
-              }}
-              whileHover={{
-                borderColor: "rgba(245,166,35,0.25)",
-                borderLeftColor: post.featured ? "#f5a623" : "rgba(245,166,35,0.9)",
-              }}
-              variants={cardVariants}
-            >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 12,
-              }}
-            >
-              <span style={{ fontSize: 11, fontFamily: "monospace", color: "#6b7280" }}>
-                {post.date}
-              </span>
-              {post.featured && (
-                <span
-                  style={{
-                    fontSize: 9,
-                    fontFamily: "monospace",
-                    color: "#f5a623",
-                    border: "1px solid rgba(245,166,35,0.3)",
-                    borderRadius: 9999,
-                    padding: "2px 8px",
-                    letterSpacing: "0.1em",
-                  }}
-                >
-                  FEATURED
-                </span>
-              )}
-            </div>
-
-            {/* Title */}
-            <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors">
-              {post.title}
-            </h3>
-
-            {/* Excerpt */}
-            <p className="text-sm text-gray-500 mt-2 leading-relaxed line-clamp-3">
-              {post.excerpt}
-            </p>
-
-            {/* Footer */}
-            <div className="flex justify-between items-center mt-6">
-              <span className="text-xs text-gray-600 font-mono">
-                {post.readTime}
-              </span>
-              <div className="flex gap-1">
-                {post.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs px-2 py-0.5 rounded"
-                    style={{
-                      background: "rgba(255,255,255,0.04)",
-                      color: "#9ca3af",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-            </motion.div>
-          </Link>
-        ))}
-      </motion.div>
-
-      {!defaultShowAll && (
-        <button
-          onClick={() => setShowAll(!showAll)}
-          className="mt-8 text-[#f5a623] hover:text-[#f7b84b] text-sm font-mono transition-colors flex items-center gap-2 mx-auto"
+        {/* Grid */}
+        <motion.div
+          key={showAll ? "all" : "featured"}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.08 },
+            },
+          }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
         >
-          {showAll ? "← Show Less" : "View All Posts →"}
-        </button>
-      )}
+          {displayed.map((post, i) => (
+            <motion.div
+              key={post.slug}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              }}
+            >
+              <Link
+                href={`/blog/${post.slug}`}
+                style={{ textDecoration: "none", display: "block", height: "100%" }}
+              >
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  style={{
+                    height: "100%",
+                    background: "#1e1e1c",
+                    border: "1px solid rgba(245,245,240,0.07)",
+                    borderLeft: post.featured
+                      ? "3px solid #f5f5f0"
+                      : "3px solid rgba(245,245,240,0.12)",
+                    borderRadius: 12,
+                    padding: 24,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 0,
+                    cursor: "pointer",
+                    transition: "border-color 0.2s, box-shadow 0.2s",
+                  }}
+                  onHoverStart={(e) => {
+                    const el = (e.target as HTMLElement)
+                      .closest("[data-blog-card]") as HTMLElement;
+                    if (!el) return;
+                    el.style.borderColor = "rgba(245,245,240,0.25)";
+                    el.style.boxShadow = "0 8px 32px rgba(0,0,0,0.3)";
+                  }}
+                  onHoverEnd={(e) => {
+                    const el = (e.target as HTMLElement)
+                      .closest("[data-blog-card]") as HTMLElement;
+                    if (!el) return;
+                    el.style.borderColor = post.featured
+                      ? "#f5f5f0"
+                      : "rgba(245,245,240,0.12)";
+                    el.style.boxShadow = "none";
+                  }}
+                  data-blog-card
+                >
+                  {/* Top row: date + featured badge */}
+                  <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: 16,
+                  }}>
+                    <span style={{
+                      fontSize: 11,
+                      fontFamily: "monospace",
+                      color: "#6b6b65",
+                    }}>
+                      {post.date}
+                    </span>
+                    {post.featured && (
+                      <span style={{
+                        fontSize: 9,
+                        fontFamily: "monospace",
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        color: "#9a9a94",
+                        padding: "2px 7px",
+                        borderRadius: 4,
+                        border: "1px solid rgba(245,245,240,0.12)",
+                        background: "rgba(245,245,240,0.04)",
+                      }}>
+                        Featured
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Title */}
+                  <h3 style={{
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: "#f5f5f0",
+                    lineHeight: 1.5,
+                    letterSpacing: "-0.01em",
+                    marginBottom: 10,
+                    flex: 1,
+                  }}>
+                    {post.title}
+                  </h3>
+
+                  {/* Excerpt */}
+                  <p style={{
+                    fontSize: 13,
+                    color: "#6b6b65",
+                    lineHeight: 1.7,
+                    marginBottom: 20,
+                    display: "-webkit-box",
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: "vertical" as const,
+                    overflow: "hidden",
+                  }}>
+                    {post.excerpt}
+                  </p>
+
+                  {/* Bottom row: read time + tags */}
+                  <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: 14,
+                    borderTop: "1px solid rgba(245,245,240,0.06)",
+                  }}>
+                    <span style={{
+                      fontSize: 11,
+                      fontFamily: "monospace",
+                      color: "#6b6b65",
+                    }}>
+                      {post.readTime}
+                    </span>
+                    <div style={{ display: "flex", gap: 4 }}>
+                      {post.tags.slice(0, 2).map((tag) => (
+                        <span key={tag} style={{
+                          fontSize: 10,
+                          fontFamily: "monospace",
+                          color: "#6b6b65",
+                          padding: "2px 6px",
+                          borderRadius: 4,
+                          border: "1px solid rgba(245,245,240,0.08)",
+                          background: "rgba(245,245,240,0.03)",
+                        }}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Show all toggle */}
+        {!defaultShowAll && (
+          <div style={{ textAlign: "center", marginTop: 40 }}>
+            <button
+              onClick={() => setShowAll(!showAll)}
+              style={{
+                fontSize: 13,
+                fontFamily: "monospace",
+                color: "#9a9a94",
+                background: "transparent",
+                border: "1px solid rgba(245,245,240,0.1)",
+                padding: "8px 20px",
+                borderRadius: 6,
+                cursor: "pointer",
+                letterSpacing: "0.05em",
+              }}
+            >
+              {showAll ? "← Show Less" : "View All Posts →"}
+            </button>
+          </div>
+        )}
+      </div>
     </section>
   );
 }
