@@ -17,7 +17,7 @@ const socialLinks = [
   {
     platform: "LinkedIn",
     handle: "faiz-khan",
-    href: "https://linkedin.com/in/faiz-khan",
+    href: "https://www.linkedin.com/in/faiz-ahmad-khan-xyz123abc",
     Icon: FaLinkedin,
     desc: "Professional",
   },
