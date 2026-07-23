@@ -238,7 +238,7 @@ export default function Hero() {
               </a>
 
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/faiz-ahmad-khan-xyz123abc"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
